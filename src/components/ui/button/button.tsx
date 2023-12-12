@@ -10,8 +10,8 @@ export type ButtonProps<T extends  ElementType='button'> = {
     // className?: string
 } & ComponentPropsWithoutRef<T>
 
-
-export const Button = <T extends ElementType ='button'>(props: ButtonProps<T>) => {
+// С помощью Omit мы убираем из пропсов переданного компонента все пропсы, которые уже есть в наших кастомных пропсах, тем самым избегая коллизий.
+export const Button = <T extends ElementType ='button'>(props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>) => {
 const { className, fullWidth, variant = 'primary',as:Component='button',  ...rest }=props
 
     return (
