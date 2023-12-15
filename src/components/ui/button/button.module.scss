@@ -1,5 +1,4 @@
 .button {
-// .button, .button:active {
 // отменяем стандартные стили
   all: unset;
   cursor: pointer;
@@ -13,7 +12,6 @@
     outline: 2px solid var(--color-info-500);
   }
   &:active{
-//   background:#01ef92;
   opacity:0.8;
   }
 }

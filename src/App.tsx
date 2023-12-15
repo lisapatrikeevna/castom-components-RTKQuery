@@ -1,6 +1,6 @@
 import {Button} from "@/components/ui/button";
 import {Card} from "@/components/ui/card";
-import InfoIcon from "@/assets/InfoIcon.tsx";
+import InfoIcon from "../../flash_cards_2/src/assets/icons/InfoIcon.tsx";
 import {TabSwitcher} from "@/components/ui/tabSwitcher/tabSwitcher.tsx";
 
 export function App() {

@@ -1,4 +1,4 @@
-import {ComponentPropsWithoutRef,  ReactNode} from "react";
+import {ComponentPropsWithoutRef, ReactNode} from "react";
 import s from './card.module.scss'
 
 export type titleType = {
@@ -20,13 +20,13 @@ export const Card = (props: CardProps) => {
     }
 
     return (
-        <div {...rest}
-             className={`${s.card} ${s[variant]} ${className}`} style={sizeCard}>
+        <div {...rest} className={`${s.card} ${s[variant]} ${className}`} style={sizeCard}>
             {props.title &&
                 <div className={s.cardHeader}>
                     <div className={s.iconSize}>{props.title.iconElement}</div>
                     <h3>{props.title.text}</h3>
                 </div>}
+
             {props.children && <div className={s.body}>{props.children}</div>}
         </div>
     )

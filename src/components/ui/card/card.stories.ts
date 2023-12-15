@@ -1,4 +1,4 @@
-import InfoIcon from "@/assets/InfoIcon.tsx";
+import InfoIcon from "../../../../../flash_cards_2/src/assets/icons/InfoIcon.tsx";
 import type { Meta, StoryObj } from '@storybook/react'
 import {ReactNode} from "react";
 
@@ -33,7 +33,6 @@ type Story = StoryObj<typeof meta>
 export const Dark: Story = {
     args: {
         variant: 'dark',
-        // title: {text:'dark title',iconElement: <InfoIcon/>},
         children: 'inner text for dark body',
         width: '500px',
     },
@@ -53,19 +52,4 @@ export const White: Story = {
     },
 }
 
-// export const withIcons: Story = {
-//     args: {
-//         variant: 'primary',
-//         children: (<> <iconName>  someText</>),
-//         as: 'button',
-//     },
-// }
 
-// export const FullWidth: Story = {
-//     args: {
-//         variant: 'primary',
-//         children: 'Full Width Button',
-//         disabled: false,
-//         fullWidth: true,
-//     },
-// }

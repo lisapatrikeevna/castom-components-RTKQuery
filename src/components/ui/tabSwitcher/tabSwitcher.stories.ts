@@ -6,69 +6,35 @@ const meta = {
     title: 'Components/Button',
     component: TabSwitcher,
     tags: ['autodocs'],
-    // argTypes: {
-    //     variant: {
-    //         options: ['primary', 'secondary', 'tertiary', 'link'],
-    //         control: { type: 'radio' },
-    //     },
-    //     title:{
-    //         control:{type:'text'},
-    //     },
-    // },
+    argTypes: {
+        variant: {
+            options: ['light', 'average', 'dark'],
+            control: { type: 'radio' },
+        },
+        buttonsVariant: {
+            options: ['primary', 'secondary', 'tertiary', 'link'],
+            control: { type: 'radio' },
+        },
+        buttonsName:{
+            control:'text'
+            // control:{ type:Array<string>}
+        },
+    },
 } satisfies Meta<typeof TabSwitcher>
 
 export default meta
-// type Story = StoryObj<typeof meta>
-//
-// export const Primary: Story = {
-//     args: {
-//         variant: 'primary',
-//         children: 'Primary Button',
-//         disabled: false,
-//     },
-// }
-//
-// export const Secondary: Story = {
-//     args: {
-//         variant: 'secondary',
-//         children: 'Secondary Button',
-//         disabled: false,
-//     },
-// }
-// export const Tertiary: Story = {
-//     args: {
-//         variant: 'tertiary',
-//         children: 'Tertiary Button',
-//         disabled: false,
-//     },
-// }
-// export const Link: Story = {
-//     args: {
-//         variant: 'link',
-//         children: 'Tertiary Button',
-//         disabled: false,
-//     },
-// }
-// export const AsLink: Story = {
-//     args: {
-//         variant: 'primary',
-//         children: 'Link that looks like a button',
-//         as: 'a',
-//     },
-// }
-// export const withIcons: Story = {
-//     args: {
-//         variant: 'primary',
-//         // children: (<> <iconName>  someText</>),
-//         as: 'button',
-//     },
-// }
-//
-// export const FullWidth: Story = {
-//     args: {
-//         variant: 'primary',
-//         children: 'Full Width Button',
-//         disabled: false,
-//         fullWidth: true,
-//     },
-// }
+type Story = StoryObj<typeof meta>
+
+export const Average: Story = {
+    args: {
+        variant: 'average',
+        buttonsName: ['Primary Button','nex btn']
+    },
+}
+export const Dark: Story = {
+    args: {
+        variant: 'dark',
+        buttonsName: ['Button','nex btn']
+    },
+}
+

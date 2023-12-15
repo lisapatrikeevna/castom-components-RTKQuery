@@ -13,7 +13,6 @@ color: #FFFEFE;;
   border:1px solid #313131;
   box-shadow: -1px -1px 2px 0px #0000001A;
   border-radius:2px;
-//   background: var(--Dark-700, #171717);
   &:hover {
     outline: 2px solid var(--color-info-500);
   }
@@ -28,8 +27,6 @@ font-weight: 600;
 padding:0 12px;
 word-wrap: break-word;
 width:100%;
-// justify-content: startFlexs;
-//     align-items:center;
 display: inline-flex;
 }
 

@@ -2,9 +2,9 @@
     width: max-content;
     margin:5px;
     padding:15px;
-//   &:focus-visible {
-//     outline: 2px solid var(--color-info-500);
-//   }
+  &:focus-visible {
+    outline: 2px solid var(--color-info-500);
+  }
 }
 .btnWrap{
   display: flex;
@@ -36,8 +36,9 @@
   background: var(--Dark-700, #171717);
   }
     &:focus{
-    border-color: red;
-    background: var(--Dark-700, #171717);
+border-color: var(--Primary-500, #8C61FF);
+  background: var(--Primary-500, #8C61FF);
+//     background: var(--Dark-700, #171717);
     }
 }
 
