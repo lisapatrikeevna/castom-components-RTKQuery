@@ -1,0 +1,63 @@
+.tabSwitcher {
+    width: max-content;
+    margin:5px;
+    padding:15px;
+//   &:focus-visible {
+//     outline: 2px solid var(--color-info-500);
+//   }
+}
+.btnWrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.button {
+  width:100px;
+  border-radius: 2px 0px 0px 2px;
+  border :1px solid var(--Dark-300, #4C4C4C);
+  padding: 6px 24px;
+
+  background: transparent;
+//   border-color: var(--Dark-300, #4C4C4C);
+  &:focus{
+  border-color: var(--Info-900, #234E99);
+  background: var(--Dark-700, #171717);
+  }
+  &:hover{
+  border-color: var(--Dark-100, #808080);
+  background: var(--Dark-300, #4C4C4C);
+  }
+  &:active{
+  border-color: var(--Primary-500, #8C61FF);
+  background: var(--Primary-500, #8C61FF);
+  }
+  &:disabled{
+  border-color: var(--Dark-300, #4C4C4C);
+  background: var(--Dark-700, #171717);
+  }
+    &:focus{
+    border-color: red;
+    background: var(--Dark-700, #171717);
+    }
+}
+
+.btnDefault {
+  background-color: transparent;
+  border-color: var(--Dark-300, #4C4C4C);
+}
+
+.btnActive {
+  border-color: var(--Primary-500, #8C61FF);
+  background: var(--Primary-500, #8C61FF);
+}
+
+.light {
+  background-color: #808080;
+}
+
+.average {
+ background-color: #4C4C4C;
+}
+.dark {
+ background-color: #171717;
+}
