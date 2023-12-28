@@ -10,6 +10,7 @@ type InputProps = {
   clearInput?: () => void
   error?: string
   label?: string
+  className?:string
 } & ComponentPropsWithoutRef<'input'>
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, clearInput, error, label, type = 'text', ...rest }, ref) => {
@@ -19,6 +20,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const showClearButton = type === 'search' && rest?.value?.toString().length! > 0
     const showError = !!error && error.length > 0
     const classInput = cx(s[type], s.input, showError && s.error, className)
+
+    console.log(rest.value);
 
     const clearButton = (
       <button className={s.buttonIcon} onClick={clearInput} type={'button'}>
@@ -32,7 +35,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     )
 
     return (
-      <div className={s.box}>
+      <div className={`${s.box} ${className}`}>
         <Typography as={'label'} className={s.label} variant={'body1'}>
           {type === 'search' ? '' : label}
         </Typography>
