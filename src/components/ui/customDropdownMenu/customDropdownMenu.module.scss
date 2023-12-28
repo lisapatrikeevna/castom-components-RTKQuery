@@ -1,0 +1,82 @@
+.dropdownMenu {
+    position: relative;
+    display: inline-block;
+}
+
+.trigger {
+    cursor: pointer;
+}
+
+.content {
+    position: absolute;
+    top: 160%;
+    left: -4px;
+    display: none;
+    border: 1px solid #4c4c4c;
+    background-color: var(--color-dark-500);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    z-index: 1000;
+        color: var(--color-light-100);
+        min-width: 200px;
+        border-radius: 7px;
+
+        &:before{
+       display: block;
+                  content: "";
+           width: 0;
+           position: absolute;
+           height: 0;
+           border-bottom: 10px solid #4c4c4c;
+           border-left: 7px solid transparent;
+           border-right: 7px solid transparent;
+           top: -6%;
+        }
+}
+
+.dropdownMenu:hover .content {
+    display: block;
+}
+
+.menuItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.menuSeparator {
+    border-top: 1px solid #4c4c4c;
+    margin: 4px 0;
+}
+
+.subMenu {
+    position: relative;
+    display: inline-block;
+}
+
+.subTrigger {
+    cursor: pointer;
+    color:#888;
+}
+
+.subContent {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: none;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    z-index: 1000;
+}
+
+.subMenu:hover .subContent {
+    display: block;
+}
+
+.shortcut {
+    margin-left: 8px;
+    color: #888;
+}

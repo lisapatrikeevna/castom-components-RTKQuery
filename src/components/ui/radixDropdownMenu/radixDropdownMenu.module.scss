@@ -1,0 +1,121 @@
+.BtnMenu {
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 40px;
+}
+.DropdownMenuContent {
+  border: 1px solid #4c4c4c;
+  background: var(--color-dark-500);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  color: var(--color-light-100);
+  min-width: 200px;
+  border-radius: 7px;
+  margin-top: 5px;
+  margin-right: 75px;
+
+  &:before {
+    display: block;
+    content: '';
+    width: 0;
+    position: absolute;
+    height: 0;
+    border-bottom: 10px solid #4c4c4c;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    top: -2%;
+    //     margin-left: 43%;
+    margin-left: 150px;
+  }
+
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.DropdownMenuContent[data-side='top'],
+.DropdownMenuSubContent[data-side='top'] {
+  animation-name: slideDownAndFade;
+}
+.DropdownMenuContent[data-side='right'],
+.DropdownMenuSubContent[data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+.DropdownMenuContent[data-side='bottom'],
+.DropdownMenuSubContent[data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+.DropdownMenuContent[data-side='left'],
+.DropdownMenuSubContent[data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+.DropdownMenuSubContent {
+  border: 1px solid #4c4c4c;
+  background: var(--color-dark-500);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  color: var(--color-light-100);
+  min-width: 200px;
+  border-radius: 7px;
+  margin-top: -15px;
+  // margin-right:75px;
+
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  animation: scaleIn 0.5s ease-out;
+}
+
+.DropdownMenuItem {
+  opacity: 0.3;
+}
+
+.DropdownMenuSeparator {
+  all: unset;
+  //   border-top: 1px solid #4c4c4c;
+  border-top: 1px solid var(--Dark-500, #333);
+  margin: 4px 0;
+  width: 100%;
+  height: 1px;
+}
+
+.subMenu {
+  position: relative;
+  display: inline-block;
+}
+
+.subTrigger {
+  cursor: pointer;
+  color: #888;
+}
+
+.subContent {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: none;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  z-index: 1000;
+}
+
+.subMenu:hover .subContent {
+  display: block;
+}
+
+.shortcut {
+  margin-left: 8px;
+  color: #888;
+}
