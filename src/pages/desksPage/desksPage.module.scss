@@ -1,0 +1,70 @@
+.container{
+// padding: 33px 136px;
+padding: 3% 11%;
+}
+.flexBox{
+display:flex;
+justify-content: space-between;
+align-items: center;
+}
+
+
+.pageHeader{
+// background:red;
+}
+
+.pageTitle{
+// color: var(--color-light-100);
+color: #fff;
+font-size: 26px;
+}
+.btn{
+display: flex;
+width: 144px;
+height: 36px;
+padding: 6px 28px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+}
+.filterWrap{
+// flex-wrap:nowrap;
+align-items: flex-end;
+margin-bottom:36px;
+}
+.search{
+width:299px!important;
+}
+.tabSwitcherWrap{
+    margin: 0!important;
+    padding: 0!important;
+background: transparent!important;
+ &>h4{
+ font-size: 14px;
+ font-style: normal;
+ font-weight: 400;
+ line-height: 24px; /* 171.429% */
+
+ }
+}
+h4{
+font-size: 14px;
+ font-style: normal;
+ font-weight: 400;
+ line-height: 24px; /* 171.429% */
+}
+.clierFilterBtn{
+width: 144px;
+background: var(--Dark-300, #4C4C4C);
+box-shadow: 0px 2px 10px 0px rgba(109, 109, 109, 0.25);
+}
+
+@media screen and (max-width: 1300px) {
+.container{
+padding: 3% 7%;
+}
+.filterWrap{
+flex-wrap:wrap;
+}
+}
