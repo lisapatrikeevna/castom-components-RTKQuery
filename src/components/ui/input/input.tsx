@@ -21,7 +21,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const showError = !!error && error.length > 0
     const classInput = cx(s[type], s.input, showError && s.error, className)
 
-    console.log(rest.value);
 
     const clearButton = (
       <button className={s.buttonIcon} onClick={clearInput} type={'button'}>
