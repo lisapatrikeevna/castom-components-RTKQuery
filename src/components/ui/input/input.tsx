@@ -12,6 +12,10 @@ type InputProps = {
   label?: string
   className?:string
 } & ComponentPropsWithoutRef<'input'>
+
+
+
+
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, clearInput, error, label, type = 'text', ...rest }, ref) => {
     const [show, setShow] = useState(false)
@@ -28,14 +32,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       </button>
     )
     const eyeButton = type === 'password' && (
-      <button className={s.buttonIcon} onMouseDown={showPass} onMouseUp={showPass} type={'button'}>
+      <button className={s.buttonIcon} onMouseDown={showPass} onMouseUp={showPass} onMouseOut={() => setShow(false)} type={'button'}>
         <IconEye />
       </button>
     )
 
     return (
       <div className={`${s.box} ${className}`}>
-        <Typography as={'label'} className={s.label} variant={'body1'}>
+        <Typography as="label" className={s.label} variant="body1">
           {type === 'search' ? '' : label}
         </Typography>
         <div className={s.inputBox}>
@@ -45,7 +49,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {eyeButton}
         </div>
         {showError && (
-          <Typography as={'label'} className={s.error} variant={'caption'}>
+          <Typography as="label" className={s.error} variant="caption">
             {error}
           </Typography>
         )}

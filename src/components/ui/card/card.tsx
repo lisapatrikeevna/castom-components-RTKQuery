@@ -23,7 +23,7 @@ export const Card = (props: CardProps) => {
         <div {...rest} className={`${s.card} ${s[variant]} ${className}`} style={sizeCard}>
             {props.title &&
                 <div className={s.cardHeader}>
-                    <div className={s.iconSize}>{props.title.iconElement}</div>
+                    {props.title.iconElement && <div className={s.iconSize}>{props.title.iconElement}</div>}
                     <h3>{props.title.text}</h3>
                 </div>}
 

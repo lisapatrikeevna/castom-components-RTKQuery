@@ -1,7 +1,8 @@
 .wrapperCard {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
 }
 
 .intoAuthCard {
@@ -9,6 +10,7 @@
   flex-direction: column;
 
   padding: 33px 36px 25px;
+      height: max-content;
 
   background-color: var(--color-dark-700);
   border: var(--color-border) solid 1px;

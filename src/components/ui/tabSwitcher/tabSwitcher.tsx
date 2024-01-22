@@ -1,30 +1,35 @@
 import { Button } from "@/components/ui/button";
-import { ComponentPropsWithoutRef, useState } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 import s from './TabSwitcher.module.scss'
 
 
+export type TabSwitcherBtnType={
+  name:string
+  value:string
+}
 export type TabSwitcherProps = {
   variant?: 'light' | 'average' | 'dark'
   buttonsVariant?: 'primary' | 'secondary' | 'tertiary' | 'link'
-  buttonsName: Array<string>
+  buttonsData: Array<TabSwitcherBtnType>
   className?: string
   title?:string
+  onChange:(value:TabSwitcherBtnType)=>void
+  activeBtn:string
 } & ComponentPropsWithoutRef<'div'>
 
 export const TabSwitcher = (props: TabSwitcherProps) => {
-  const {className, buttonsName, variant = 'dark', buttonsVariant = 'primary',title, ...rest} = props
-  const [active, setStatus] = useState<number>(0)
+  const {onChange,activeBtn,className, buttonsData, variant = 'dark', buttonsVariant = 'primary',title, ...rest} = props
 
-  const btnHandler = (i: number, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setStatus(i)
+  const btnHandler = ( b:TabSwitcherBtnType) => {
+    onChange(b)
   }
 
 
   return (<div className={`${s.tabSwitcher} ${variant && s[variant]} ${className}`} {...rest}>
     <h4>{title}</h4>
-    {buttonsName.map((b: string, i: number) => <Button key={i} variant={buttonsVariant && buttonsVariant}
-                                                       className={` ${s.button}  ${active === i && s.btnActive}`} onClick={(e) => btnHandler(i, e)}>
-      {b}
+    {buttonsData.map((b: TabSwitcherBtnType, i: number) => <Button
+      key={i} variant={buttonsVariant && buttonsVariant} className={` ${s.button}  ${activeBtn === b.value && s.btnActive}`} onClick={() => btnHandler( b)}>
+      {b.name}
     </Button>)}
   </div>)
 }
