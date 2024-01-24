@@ -28,11 +28,10 @@ const DesksPage = () => {
   const [isOpen, setIsOpen] = useState<boolean|null>(null)
   const selectOptions = ['10', '20', '50', '100']
   const {data: decksData, error} = useGetDecksQuery({currentPage, minCardsCount: sliderValue[0], maxCardsCount: sliderValue[1], name: searchValue, itemsPerPage, ...(tabSwitcherValue !== 'all' ? {authorId: userId} : {})})
-  const {data: deckByIdData} = useGetDeckByIdQuery({id: 'clpuyvj1o01y0ry2xjr6yeuny'})
+  const {data: deckByIdData} = useGetDeckByIdQuery({id: userId})
   //  const { data:userDecks,error:userDecksErr } = useGetDeckByIdQuery({ userId,minCardsCount,maxCardsCount,name})
 
   useEffect(() => decksData && setCurrentPage(decksData.pagination.currentPage), [decksData])
-  console.log("isOpen", isOpen);
 
   const arrBtnTabSwitcher = [{name: 'My Cards', value: 'me'}, {name: 'All Cards', value: 'all'}]
   useEffect(() => {setCurrentPage(1)}, [sliderValue, searchValue])

@@ -1,0 +1,18 @@
+.container{
+
+
+
+
+.imgContainer{
+    width:100px;
+    img{
+    width:100%;
+    }
+}
+.headingCart{
+
+& .deskTitle{
+color: var(--color-light-100);
+}
+}
+}
