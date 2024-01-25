@@ -1,5 +1,5 @@
 import { baseApi } from "@/services/base-api.ts";
-import { CreateDecksArgs, GetDeckByIdArgs, GetDecksArgs, GetDecksResponse } from "@/pages/flashcards.types.ts";
+import { CreateDecksArgs, GetDeckByIdArgs, GetDecksArgs, GetDecksResponse, UpdateDecksArgs } from "@/pages/flashcards.types.ts";
 
 
 const decksServiece=baseApi.injectEndpoints({
@@ -11,9 +11,10 @@ const decksServiece=baseApi.injectEndpoints({
       },
       invalidatesTags:['Decks'],
     }),
-    updateDeck: builder.mutation<void, CreateDecksArgs>({
+    updateDeck: builder.mutation<void, UpdateDecksArgs>({
       query: arg => {
-        return {body: arg, method: 'PUT', url: `v1/decks/${id}`,}
+        console.log(arg);
+        return {body: {cover:arg.cover,name:arg.name, isPrivate:arg.isPrivate}, method: 'PATCH', url: `v1/decks/${arg.id}`,}
       },
       invalidatesTags:['Decks']
     }),
@@ -38,7 +39,7 @@ const decksServiece=baseApi.injectEndpoints({
 },
 })
 
-export const { useRemoveDeckMutation,useCreateDeckMutation, useGetDeckByIdQuery, useGetDecksQuery } = decksServiece
+export const { useRemoveDeckMutation,useCreateDeckMutation, useGetDeckByIdQuery, useGetDecksQuery,useUpdateDeckMutation } = decksServiece
 
 
 

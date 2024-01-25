@@ -20,6 +20,12 @@ export type CreateDecksArgs = {
   isPrivate?: boolean
   name: string
 }
+export type UpdateDecksArgs = {
+  cover?: string
+  isPrivate?: boolean
+  name: string
+  id:string
+}
 export type GetDecksResponsePagination = {
   currentPage: number
   itemsPerPage: number

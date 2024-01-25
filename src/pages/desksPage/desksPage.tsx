@@ -44,7 +44,6 @@ const DesksPage = () => {
   const clearInputHandler = () => setSearchValue('')
   const tabSwitcherHandler = (dataBtn: TabSwitcherBtnType) => setTabSwitcherValue(dataBtn.value)
   const isOpenHandler = (isOpenValue: boolean) => {
-    console.log("isOpenHandler/isOpen", isOpen);
     setIsOpen(isOpenValue)
   }
   // isLoading - первая загрузка, когда нет данных
@@ -54,7 +53,7 @@ const DesksPage = () => {
   // При isLoading мы показываем крутилки/скелетоны, при isFetching дизейблим пагинацию, как пример
 
 
-  return <div className={s.container}>
+  return <>
 
     <div className={`${s.flexBox}  ${s.pageHeader}`}>
       {/*<Typography as={'h2'} className={s.pageTitle}>Packs list</Typography>*/}
@@ -75,7 +74,7 @@ const DesksPage = () => {
     {error && <p>useGetDecksQuery: {error.toString()}</p>}
     {decksData && <Decks userId={userId} items={decksData.items}/>}
     <Pagination currentPage={currentPage} handlePageChange={(pageNumber: number) => setCurrentPage(pageNumber)} handleSetItemsPerPage={(numItemsPerPage: number) => setItemsPerPage(numItemsPerPage)} itemsPerPage={itemsPerPage} selectOptions={selectOptions} totalCount={decksData?.maxCardsCount} totalPages={decksData?.pagination.totalPages}/>
-  </div>
+  </>
 }
 
 export default DesksPage;

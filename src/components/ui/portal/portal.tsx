@@ -14,6 +14,7 @@ type propsType = {
   textBtnClose?:string
   portalWrapClass?: string
   isOpen?:boolean
+  openBtn?:ReactNode
 }
 const Portal = (props: propsType) => {
   const [portalVisible, setPortalVisible] = useState(false);
@@ -25,12 +26,12 @@ const Portal = (props: propsType) => {
    return
    },[props.isOpen])
   const handlePortalOpen = () => setPortalVisible(true);
-
   const handlePortalClose = () => setPortalVisible(false);
 
 
   return (<div>
     {props.textBtnOpen && <Button onClick={handlePortalOpen}>{props.textBtnOpen}</Button>}
+    {props.openBtn && props.openBtn}
     {portalVisible && createPortal(<PortalComponent onClose={handlePortalClose} text={props.text} title={props.title} textBtnClose={props.textBtnClose} portalWrapClass={props.portalWrapClass} children={props.children}/>, document.body)}
     </div>);
 };

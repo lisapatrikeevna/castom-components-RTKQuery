@@ -16,6 +16,10 @@ import { useDispatch } from "react-redux";
 import { appAC } from "@/services/app.slice.ts";
 import { PATH } from "@/router.tsx";
 import { useNavigate } from "react-router-dom";
+import Portal from "@/components/ui/portal/portal.tsx";
+import AddNewDeckBody from "@/components/addNewDeckBody/addNewDeckBody.tsx";
+import { useState } from "react";
+import UpdateDeckBody from "@/components/updateDeckBody/updateDeckBody.tsx";
 
 
 type propsType={
@@ -27,18 +31,19 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
 
   const dispatch=useDispatch()
   const navigate =useNavigate()
-  const [createDeck, { isLoading }] = useCreateDeckMutation()
-  // const [data, error] = useRemoveDeckMutation()
+  // const [createDeck, { isLoading }] = useCreateDeckMutation()
+  const [isOpen, setIsOpen] = useState<boolean|null>(null)
   const [removeDeck, { isLoading: isRemoved }] = useRemoveDeckMutation()
-  // const [updateDeck, { isLoading: isUpdating }] = useUpdatePostMutation()
+
   // console.log("userDecks, userDecksErr", userDecks, userDecksErr);
   // console.log(data);
 // if( error ){
 //   return <h2>{error.data.message}</h2>
 //   // return <h2>{JSON.stringify(error)}</h2>
 // }
-
-  // console.log(data.pagination.);
+  const isOpenHandler = (isOpenValue=true ) => {
+    setIsOpen(isOpenValue)
+  }
   const getCards = (el:any) => {
     dispatch(appAC.setDecksId(el.id))
     dispatch(appAC.setDecksName(el.name))
@@ -48,7 +53,7 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
 
 
   return (
-    <>
+    <div className={s.container}>
       <Table>
         <TableHead className={s.tableHead}>
           <TableRow>
@@ -78,7 +83,9 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
                   <Button iconBtn={true} title={'play'} onClick={()=>getCards(el)}><PlayIcon colorFill={'#fff'}/></Button>
                   {userId ==el.userId &&
                   <>
-                    <Button iconBtn={true} title={'edit cards'}><EditIcon colorFill={'#fff'}/></Button>
+                    <Portal title={'Edit Deck'} isOpen={isOpen} children={<UpdateDeckBody isOpenHandler={isOpenHandler} deck={el}/>}
+                            openBtn={ <Button iconBtn={true} title={'edit cards'} onClick={isOpenHandler}><EditIcon colorFill={'#fff'}/></Button>}/>
+
                     <Button iconBtn={true} title={'delete cards'} onClick={()=>removeDeck(el.id)}><TrashIcon colorFill={'#fff'}/></Button>
                   </>}
                   </div>
@@ -88,6 +95,6 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
           })}
         </TableBody>
       </Table>
-    </>
+    </div>
   )
 }

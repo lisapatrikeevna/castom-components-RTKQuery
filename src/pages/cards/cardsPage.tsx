@@ -28,8 +28,8 @@ const CardsPage = () => {
   const id = useSelector<RootStateType, string>(state => state.app.decksId)
   const name = useSelector<RootStateType, string>(state => state.app.decksName)
   const imgUrl = useSelector<RootStateType, string>(state => state.app.decksImg)
-  // const {data,isError} = useGetCardsQuery(id)
-  const {data,isError} = useGetCardsQuery(id??'')
+  const {data,isError} = useGetCardsQuery(id)
+  // const {data,isError} = useGetCardsQuery(id??'')
   console.log("data", data);
 
   if (isError || !data) {
@@ -37,9 +37,9 @@ const CardsPage = () => {
   }
 
   return (
-    <div>
-      <div >
-        <div>
+    <div className={s.container}>
+      <div  className={s.cartInfo}>
+        <div className={s.headingCart}>
           <Typography as={'h3'} className={s.deskTitle}> {name}</Typography>
           {imgUrl && <div className={s.imgContainer}><img src={imgUrl} alt={name}/></div>}
         </div>
@@ -52,11 +52,10 @@ const CardsPage = () => {
         <Table>
           <TableHead className={s.tableHead}>
             <TableRow>
-              <TableHeadCell>Name</TableHeadCell>
-              <TableHeadCell>Cards</TableHeadCell>
+              <TableHeadCell>Question</TableHeadCell>
+              <TableHeadCell>Answer</TableHeadCell>
               <TableHeadCell>Last Updated</TableHeadCell>
-              <TableHeadCell>Created by</TableHeadCell>
-              <TableHeadCell></TableHeadCell>
+              <TableHeadCell>Grade</TableHeadCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -64,11 +63,20 @@ const CardsPage = () => {
               console.log("el", el)
               return (<TableRow key={el.id}>
                 {/*<TableCell>{el.name}</TableCell>*/}
-                <TableCell>{el.questionImg && <div className={s.imgContainer} ><img src={el.questionImg}/></div>}</TableCell>
-                <TableCell>{el.question}</TableCell>
-                <TableCell>{el.answerImg && <div className={s.imgContainer} ><img src={el.answerImg}/></div>}</TableCell>
-                <TableCell>{el.answer}</TableCell>
+                <TableCell>
+                  <div className={s.tableCeil}>
+                  {el.questionImg && <div className={s.imgContainer} ><img src={el.questionImg}/></div>}
+                    {el.question}
+                </div>
+                </TableCell>
+                <TableCell>
+                  <div className={s.tableCeil}>
+                    {el.answerImg && <div className={s.imgContainer} ><img src={el.answerImg}/></div>}
+                    {el.answer}
+                  </div>
+                  </TableCell>
                 <TableCell>{new Date(el.created).toLocaleDateString()}</TableCell>
+                <TableCell>{el.grade}</TableCell>
               </TableRow>)
             })}
           </TableBody>
