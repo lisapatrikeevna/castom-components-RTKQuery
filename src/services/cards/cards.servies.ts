@@ -1,5 +1,5 @@
 import { baseApi } from "@/services/base-api.ts";
-import { CreateDecksArgs, GetDeckByIdArgs, GetDecksArgs, GetDecksResponse } from "@/pages/flashcards.types.ts";
+import { CreateDecksArgs, GetDeckByIdArgs, GetDecksResponse } from "@/pages/flashcards.types.ts";
 import { ArgCreateCardType } from "@/services/cards/card.type.ts";
 
 
@@ -12,12 +12,6 @@ const cardsServiece=baseApi.injectEndpoints({
       },
       invalidatesTags:['Decks']
     }),
-    // updateDeck: builder.mutation<void, CreateDecksArgs>({
-    //   query: arg => {
-    //     return {body: arg, method: 'PUT', url: `v1/decks/${id}`,}
-    //   },
-    //   invalidatesTags:['Decks']
-    // }),
     removeDeck: builder.mutation<void, {id: string}>({
       query (id){
         return { method: 'DELETE', url: `v1/decks/${id}`,}
@@ -29,11 +23,6 @@ const cardsServiece=baseApi.injectEndpoints({
         return {url: `v1/decks/${id}`,}
       },
     }),
-    // Query hook возвращает нам  объект с двумя параметрами:
-   // queryArg - объект, содержащий свойства, такие как последние данные для запроса,
-    // а также логические значения статуса для текущего состояния жизненного цикла запроса
-   // queryOptions- Объект queryOptions принимает несколько дополнительных параметров,
-    // которые можно использовать для управления процессом получения данных.
 
     // 1 параметр - тип того, что возвращает сервер (ResultType)
     // 2 параметр - тип query аргументов (QueryArg)

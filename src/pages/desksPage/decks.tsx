@@ -83,8 +83,10 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
                   <Button iconBtn={true} title={'play'} onClick={()=>getCards(el)}><PlayIcon colorFill={'#fff'}/></Button>
                   {userId ==el.userId &&
                   <>
-                    <Portal title={'Edit Deck'} isOpen={isOpen} children={<UpdateDeckBody isOpenHandler={isOpenHandler} deck={el}/>}
-                            openBtn={ <Button iconBtn={true} title={'edit cards'} onClick={isOpenHandler}><EditIcon colorFill={'#fff'}/></Button>}/>
+                    <Portal title={'Edit Deck'}
+                            // isOpen={isOpen}
+                            children={<UpdateDeckBody isOpenHandler={isOpenHandler} deck={el}/>} openBtn={
+                              <Button iconBtn={true} title={'edit cards'} onClick={isOpenHandler}><EditIcon colorFill={'#fff'}/></Button>}/>
 
                     <Button iconBtn={true} title={'delete cards'} onClick={()=>removeDeck(el.id)}><TrashIcon colorFill={'#fff'}/></Button>
                   </>}

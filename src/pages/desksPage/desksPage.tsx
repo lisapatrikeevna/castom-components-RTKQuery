@@ -12,6 +12,7 @@ import Portal from "@/components/ui/portal/portal.tsx";
 import AddNewDeckBody from "@/components/addNewDeckBody/addNewDeckBody.tsx";
 import { Pagination } from "@/components/ui/pagination/pagination.tsx";
 import { useGetDeckByIdQuery, useGetDecksQuery } from "@/services/decks/decks.servies.ts";
+import { Typography } from "@/components/ui/typography";
 
 
 
@@ -24,15 +25,10 @@ const DesksPage = () => {
   const [tabSwitcherValue, setTabSwitcherValue] = useState('all')
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [itemsPerPage, setItemsPerPage] = useState<number>(10)
-
   const [isOpen, setIsOpen] = useState<boolean|null>(null)
   const selectOptions = ['10', '20', '50', '100']
   const {data: decksData, error} = useGetDecksQuery({currentPage, minCardsCount: sliderValue[0], maxCardsCount: sliderValue[1], name: searchValue, itemsPerPage, ...(tabSwitcherValue !== 'all' ? {authorId: userId} : {})})
-  const {data: deckByIdData} = useGetDeckByIdQuery({id: userId})
-  //  const { data:userDecks,error:userDecksErr } = useGetDeckByIdQuery({ userId,minCardsCount,maxCardsCount,name})
-
   useEffect(() => decksData && setCurrentPage(decksData.pagination.currentPage), [decksData])
-
   const arrBtnTabSwitcher = [{name: 'My Cards', value: 'me'}, {name: 'All Cards', value: 'all'}]
   useEffect(() => {setCurrentPage(1)}, [sliderValue, searchValue])
   const clearFilterHandler = () => {
@@ -43,9 +39,8 @@ const DesksPage = () => {
   const searchValueHandler = (e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.currentTarget.value)
   const clearInputHandler = () => setSearchValue('')
   const tabSwitcherHandler = (dataBtn: TabSwitcherBtnType) => setTabSwitcherValue(dataBtn.value)
-  const isOpenHandler = (isOpenValue: boolean) => {
-    setIsOpen(isOpenValue)
-  }
+  const isOpenHandler = (isOpenValue: boolean) => setIsOpen(isOpenValue)
+
   // isLoading - первая загрузка, когда нет данных
   // isFetching - обновление данных, например при возвращении на вкладку
   // Иными словами isLoading === true только при изначальной загрузке, а isFetching - при любом запросе
@@ -56,9 +51,10 @@ const DesksPage = () => {
   return <>
 
     <div className={`${s.flexBox}  ${s.pageHeader}`}>
-      {/*<Typography as={'h2'} className={s.pageTitle}>Packs list</Typography>*/}
-      <h2 className={s.pageTitle}>Packs list</h2>
+
+      <Typography as={'h2'} className={s.pageTitle}>Packs list</Typography>
       <Portal title={'Add New Deck'} textBtnOpen={'Add New Pack'} portalWrapClass={s.portalWrapClass} isOpen={isOpen} children={<AddNewDeckBody isOpenHandler={isOpenHandler}/>}/>
+
     </div>
     <div className={`${s.flexBox} ${s.filterWrap}`}>
 

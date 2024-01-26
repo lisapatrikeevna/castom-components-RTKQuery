@@ -31,23 +31,29 @@ const FileUploader = (props:propsType) => {
   const onFileChange = async(e:ChangeEvent<HTMLInputElement>) => {
     if( e.target.files && e.target.files.length > 0 ) {
       const file = e.target.files[0]
-      let imageDataUrl = await readFile(file)
+      console.log('FileUploader/file', file);
 
-      try {
-        // !!!! apply rotation if needed
-        // const orientation = await getOrientation(file)
-        // const rotation = ORIENTATION_TO_ANGLE[orientation]
-        // if( rotation ) {
-        if( imageDataUrl ) {
-          //!!! imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
-          imageDataUrl = await getRotatedImage(imageDataUrl, 0)
-        }
-      } catch( e ) {
-        console.warn('failed to detect the orientation')
-      }
 
-      setFile(imageDataUrl)
-      props.fileSelected(imageDataUrl)
+      // let imageDataUrl = await readFile(file)
+      //
+      // try {
+      //   // !!!! apply rotation if needed
+      //   // const orientation = await getOrientation(file)
+      //   // const rotation = ORIENTATION_TO_ANGLE[orientation]
+      //   // if( rotation ) {
+      //   if( imageDataUrl ) {
+      //     //!!! imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
+      //     imageDataUrl = await getRotatedImage(imageDataUrl, 0)
+      //   }
+      // } catch( e ) {
+      //   console.warn('failed to detect the orientation')
+      // }
+
+      setFile(file)
+      props.fileSelected(file)
+      // setFile(imageDataUrl)
+      // props.fileSelected(imageDataUrl)
+
     }
   }
   const click = (e: React.MouseEvent) => {

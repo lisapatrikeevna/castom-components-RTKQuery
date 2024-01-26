@@ -19,7 +19,7 @@ const UpdateDeckBody = (props:propsType) => {
   // const [addDeck, { error: addDeckError ,data }] = useCreateDeckMutation()
   const [updateDeck, { isLoading: isUpdating ,error}] = useUpdateDeckMutation()
   console.log('UpdateDeckBody',props);
-  console.log('UpdateDeckBody/deck.name', props.deck.name);
+  console.log('UpdateDeckBody/deck.name',  props.deck.name);
 
   const onChangeCroppImage =(blob: Blob) => {
     setImgValue(blob)

@@ -6,39 +6,39 @@ import { useCreateDeckMutation } from "@/services/decks/decks.servies.ts";
 import CroppedImageUploader from "@/components/ui/imageUplouder/imageUplouder.tsx";
 import { CreateDecksArgs } from "@/pages/flashcards.types.ts";
 
-
+type imgType=Blob|File|string
 type propsType={
   isOpenHandler:(isOpenValue:boolean)=>void
 }
 const AddNewDeckBody = (props:propsType) => {
-  const [imgValue, setImgValue] = useState<Blob |string>('')
+  const [imgValue, setImgValue] = useState<imgType>('')
   const [newDeckName, setNewDeckName] = useState('')
   const [privateDeck, setPrivate] = useState(false)
   const [addDeck, { error: addDeckError ,data }] = useCreateDeckMutation()
 
 
-  const onChangeCroppImage =(blob: Blob) => {
-    setImgValue(blob)
+  const onChangeCroppImage =(file: imgType) => {
+     // console.log('AddNewDeckBody/file', file);
+    setImgValue(file)
   };
 
   const createNewDeck = () => {
 
     const formData = new FormData()
     if (imgValue) {
+      // formData.append('cover', imgValue)
       formData.set('cover', imgValue)
     }
     formData.append('name', newDeckName)
     formData.append('isPrivate', privateDeck ? 'true' : 'false')
+    //
+    // const args = {
+    //   cover: imgValue, name: newDeckName, isPrivate: privateDeck
+    // }
 
-
-
-
-    const args = {
-      // cover:imgValue+nanoid(),
-      cover: imgValue, name: newDeckName, isPrivate: privateDeck
-    }
-
-    console.log('!!args', args);
+    // console.log('AddNewDeckBody/ createNewDeck/formData:' , formData);
+    // console.log('AddNewDeckBody/createNewDeck /imgValue:' , imgValue);
+    // console.log('!!args', args);
     addDeck(formData as unknown as CreateDecksArgs).unwrap().then(() => {
       setImgValue('')
       setNewDeckName('')
@@ -51,7 +51,7 @@ const AddNewDeckBody = (props:propsType) => {
   }
 
 
-  return (<div style={{marginTop:24}}>
+  return (<div style={{marginTop:7}}>
     <Input placeholder={'name'} label={'Deck name'} value={newDeckName} onChange={(e: ChangeEvent<HTMLInputElement>) => setNewDeckName(e.currentTarget.value)}/>
     <CroppedImageUploader buttonText={'select picture'} url={imgValue}  onChange={onChangeCroppImage}/>
     <CheckBox label={'Private deck'} checked={privateDeck} onCheckedChange={setPrivate}/>
@@ -73,3 +73,5 @@ type ServerErrorResponse = {
 }
 
 export default AddNewDeckBody;
+
+
