@@ -47,8 +47,7 @@ const ImageCropperModal = ({onOk, closeModal, image}: propsType) => {
   return (<>
     <div className={s.cropContainer}>
       <h3>Select part of image</h3>
-      <Cropper image={blobUrl} crop={crop} rotation={rotation} zoom={zoom} aspect={4 / 3} onCropChange={setCrop}
-	onRotationChange={setRotation} onCropComplete={onCropComplete} onZoomChange={setZoom}/>
+      <Cropper image={blobUrl} crop={crop} rotation={rotation} zoom={zoom} aspect={4 / 3} onCropChange={setCrop} onRotationChange={setRotation} onCropComplete={onCropComplete} onZoomChange={setZoom}/>
       <div className={s.sliderContainer}>
         <Typography variant="overline" className={s.sliderLabel}>
           Zoom

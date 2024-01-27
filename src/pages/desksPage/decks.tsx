@@ -6,7 +6,7 @@ import {
   TableHeadCell,
   TableRow,
 } from '@/components/ui/table/table.tsx'
-import { useCreateDeckMutation, useRemoveDeckMutation } from "@/services/decks/decks.servies.ts";
+import { useRemoveDeckMutation } from "@/services/decks/decks.servies.ts";
 import { Button } from "@/components/ui/button";
 import TrashIcon from "@/assets/icons/trashIcon.tsx";
 import PlayIcon from "@/assets/icons/playIcon.tsx";
@@ -17,31 +17,28 @@ import { appAC } from "@/services/app.slice.ts";
 import { PATH } from "@/router.tsx";
 import { useNavigate } from "react-router-dom";
 import Portal from "@/components/ui/portal/portal.tsx";
-import AddNewDeckBody from "@/components/addNewDeckBody/addNewDeckBody.tsx";
 import { useState } from "react";
 import UpdateDeckBody from "@/components/updateDeckBody/updateDeckBody.tsx";
+import { GetDecksResponseItems } from "@/pages/flashcards.types.ts";
 
 
 type propsType={
   userId:string
-  items:any
+  items:Array<GetDecksResponseItems>
 }
-//refetch-обновить данные, новый запрос
 export const Decks = ({items,userId, ...rest}:propsType) => {
 
   const dispatch=useDispatch()
   const navigate =useNavigate()
   // const [createDeck, { isLoading }] = useCreateDeckMutation()
   const [isOpen, setIsOpen] = useState<boolean|null>(null)
+  const [idUpdateDeck, setIdUpdateDeck] = useState<string|null>(null)
   const [removeDeck, { isLoading: isRemoved }] = useRemoveDeckMutation()
 
   // console.log("userDecks, userDecksErr", userDecks, userDecksErr);
   // console.log(data);
-// if( error ){
-//   return <h2>{error.data.message}</h2>
-//   // return <h2>{JSON.stringify(error)}</h2>
-// }
-  const isOpenHandler = (isOpenValue=true ) => {
+  const isOpenHandler = (isOpenValue=true ,id:string) => {
+    setIdUpdateDeck(id)
     setIsOpen(isOpenValue)
   }
   const getCards = (el:any) => {
@@ -84,9 +81,19 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
                   {userId ==el.userId &&
                   <>
                     <Portal title={'Edit Deck'}
-                            // isOpen={isOpen}
-                            children={<UpdateDeckBody isOpenHandler={isOpenHandler} deck={el}/>} openBtn={
-                              <Button iconBtn={true} title={'edit cards'} onClick={isOpenHandler}><EditIcon colorFill={'#fff'}/></Button>}/>
+                            isOpen={idUpdateDeck===el.id && isOpen}
+                            children={<UpdateDeckBody
+                              isOpenHandler={setIsOpen}
+                              deck={el}/>} openBtn={
+                              <Button iconBtn={true} title={'edit cards'}
+                                      onClick={
+                                ()=> {
+                                  console.log('el',el.name)
+                                  isOpenHandler(true, el.id)
+                                }
+                              }
+                                      // onClick={isOpenHandler}
+                              ><EditIcon colorFill={'#fff'}/></Button>}/>
 
                     <Button iconBtn={true} title={'delete cards'} onClick={()=>removeDeck(el.id)}><TrashIcon colorFill={'#fff'}/></Button>
                   </>}

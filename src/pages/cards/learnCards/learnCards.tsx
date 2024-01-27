@@ -5,7 +5,6 @@ type propsType={
 card:GetCardsType
 }
 const LearnCards = (props:propsType) => {
-  console.log(props);
 
   return (
     <div>

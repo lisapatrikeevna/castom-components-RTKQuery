@@ -7,18 +7,27 @@ import CroppedImageUploader from "@/components/ui/imageUplouder/imageUplouder.ts
 import { UpdateDecksArgs } from "@/pages/flashcards.types.ts";
 import s from './updateDeckBody.module.scss'
 
+type ServerErrorResponse = {
+  data: {
+    errorMessages: Array<{
+      field: string
+      message: string
+    }>
+  }
+}
 
 type propsType={
   isOpenHandler:(isOpenValue:boolean)=>void
   deck:any
 }
+
 const UpdateDeckBody = (props:propsType) => {
   const [imgValue, setImgValue] = useState<Blob |string>(props.deck.cover)
   const [deckName, setNewDeckName] = useState(props.deck.name)
   const [privateDeck, setPrivate] = useState(false)
   // const [addDeck, { error: addDeckError ,data }] = useCreateDeckMutation()
   const [updateDeck, { isLoading: isUpdating ,error}] = useUpdateDeckMutation()
-  console.log('UpdateDeckBody',props);
+  // console.log('UpdateDeckBody',props);
   console.log('UpdateDeckBody/deck.name',  props.deck.name);
 
   const onChangeCroppImage =(blob: Blob) => {
@@ -35,7 +44,6 @@ const UpdateDeckBody = (props:propsType) => {
     formData.append('isPrivate', privateDeck ? 'true' : 'false')
 
     const args = {
-      // cover:imgValue+nanoid(),
       cover: imgValue, name: deckName, isPrivate: privateDeck, id:props.deck.id
     }
 
@@ -64,13 +72,5 @@ const UpdateDeckBody = (props:propsType) => {
 };
 
 
-type ServerErrorResponse = {
-  data: {
-    errorMessages: Array<{
-      field: string
-      message: string
-    }>
-  }
-}
 
 export default UpdateDeckBody;

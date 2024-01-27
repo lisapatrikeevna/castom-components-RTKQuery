@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import { ReactNode, useEffect, useState } from "react";
-import s from './portal.module.scss'
+import s from './portal.module.scss';
 import { Card } from "@/components/ui/card/card.tsx";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
@@ -48,8 +48,6 @@ type PortalComponentProps = {
   portalWrapClass?: string
 }
 const PortalComponent = (props: PortalComponentProps) => {
-  // <Card width={'400px'}title={{text:'title text',iconElement:<InfoIcon/>,iconSize:'15px'}}>
-  // <h1>h1 test</h1><p style={{color: 'red'}}>some inner text</p></Card>
 
   return (<div className={s.wrap}>
       <Card className={`${s.card} ${props.portalWrapClass}`}>

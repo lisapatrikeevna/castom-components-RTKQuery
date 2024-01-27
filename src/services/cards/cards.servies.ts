@@ -6,18 +6,6 @@ import { ArgCreateCardType } from "@/services/cards/card.type.ts";
 const cardsServiece=baseApi.injectEndpoints({
  endpoints: builder => {
   return {
-    createDeck: builder.mutation<void, CreateDecksArgs>({
-      query: arg => {
-        return {body: arg, method: 'POST', url: 'v1/decks',}
-      },
-      invalidatesTags:['Decks']
-    }),
-    removeDeck: builder.mutation<void, {id: string}>({
-      query (id){
-        return { method: 'DELETE', url: `v1/decks/${id}`,}
-      },
-      invalidatesTags:['Decks']
-    }),
     getDeckById: builder.query<GetDecksResponse, GetDeckByIdArgs>({
       query: ({ id }) => {
         return {url: `v1/decks/${id}`,}

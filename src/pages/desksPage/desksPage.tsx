@@ -11,7 +11,7 @@ import { RootStateType } from "@/services/store.ts";
 import Portal from "@/components/ui/portal/portal.tsx";
 import AddNewDeckBody from "@/components/addNewDeckBody/addNewDeckBody.tsx";
 import { Pagination } from "@/components/ui/pagination/pagination.tsx";
-import { useGetDeckByIdQuery, useGetDecksQuery } from "@/services/decks/decks.servies.ts";
+import { useGetDecksQuery } from "@/services/decks/decks.servies.ts";
 import { Typography } from "@/components/ui/typography";
 
 

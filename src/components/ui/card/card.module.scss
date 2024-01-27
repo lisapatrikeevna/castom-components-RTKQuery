@@ -5,7 +5,7 @@ color: #FFFEFE;;
 .card {
   position:relative;
   width: 420px;
-  height: 552px;
+  min-height: 552px;
   display:flex;
   flex-direction: column;
   justify-content: center;
@@ -32,9 +32,9 @@ display: inline-flex;
 
 .body{
  padding: 44px 12px 30px;
-width: 100%;
-    height: -webkit-fill-available;
-    border:1px solid #8c61ff;;
+ width: 100%;
+ height: -webkit-fill-available;
+ border:1px solid #8c61ff;;
 }
 
 .width{
