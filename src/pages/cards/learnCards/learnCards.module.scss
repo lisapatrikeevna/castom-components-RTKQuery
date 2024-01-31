@@ -1,0 +1,27 @@
+.container{
+display: flex;
+    align-items: center;
+    height: inherit;
+    justify-content: center;
+
+.wrapCard{
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    align-items: center;
+    padding: 30px;
+
+ h3,p{
+     color: var(--color-light-100);
+ }
+.imgWrap{
+    width: 100px;
+    img{
+        width: 100%;
+        }
+}
+
+}
+
+}

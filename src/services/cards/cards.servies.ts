@@ -1,19 +1,18 @@
 import { baseApi } from "@/services/base-api.ts";
-import { CreateDecksArgs, GetDeckByIdArgs, GetDecksResponse } from "@/pages/flashcards.types.ts";
-import { ArgCreateCardType } from "@/services/cards/card.type.ts";
+import { ArgCreateCardType, getCardsResponseType } from "@/services/cards/card.type.ts";
 
 
+// 1 параметр - тип того, что возвращает сервер (ResultType)
+// 2 параметр - тип query аргументов (QueryArg)
 const cardsServiece=baseApi.injectEndpoints({
  endpoints: builder => {
   return {
-    getDeckById: builder.query<GetDecksResponse, GetDeckByIdArgs>({
-      query: ({ id }) => {
-        return {url: `v1/decks/${id}`,}
+    getCardById: builder.query<getCardsResponseType, string>({
+      query: (id) => {
+        debugger
+        return {url: `v1/cards/${id}`,}
       },
     }),
-
-    // 1 параметр - тип того, что возвращает сервер (ResultType)
-    // 2 параметр - тип query аргументов (QueryArg)
     getCards: builder.query<void, string>({
       query: (id) => {
         return {
@@ -33,7 +32,7 @@ const cardsServiece=baseApi.injectEndpoints({
 },
 })
 
-export const { useGetCardsQuery } = cardsServiece
+export const { useGetCardsQuery, useGetCardByIdQuery } = cardsServiece
 
 
 

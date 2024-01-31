@@ -26,19 +26,13 @@ const AddNewDeckBody = (props:propsType) => {
 
     const formData = new FormData()
     if (imgValue) {
-      // formData.append('cover', imgValue)
       formData.set('cover', imgValue)
     }
     formData.append('name', newDeckName)
     formData.append('isPrivate', privateDeck ? 'true' : 'false')
-    //
-    // const args = {
-    //   cover: imgValue, name: newDeckName, isPrivate: privateDeck
-    // }
 
     // console.log('AddNewDeckBody/ createNewDeck/formData:' , formData);
     // console.log('AddNewDeckBody/createNewDeck /imgValue:' , imgValue);
-    // console.log('!!args', args);
     addDeck(formData as unknown as CreateDecksArgs).unwrap().then(() => {
       setImgValue('')
       setNewDeckName('')

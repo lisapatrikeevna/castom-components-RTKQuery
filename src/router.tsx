@@ -13,6 +13,7 @@ import DesksPage from "@/pages/desksPage/desksPage.tsx";
 import CardsPage from "@/pages/cards/cardsPage.tsx";
 import { useDispatch } from "react-redux";
 import { appAC } from "@/services/app.slice.ts";
+import LearnCards from "@/pages/cards/learnCards/learnCards.tsx";
 
 export const PATH={
   login:'/login',
@@ -21,6 +22,7 @@ export const PATH={
   decks:'/',
   cards:'/cards',
   cardTest:'/cardTest',
+  learn:'/cards/learn',
 }
 
 const publicRotes: RouteObject[] = [
@@ -47,8 +49,12 @@ const privateRoutes: RouteObject[] = [
   },
   {
     element:<CardsPage/>,
-    path:PATH.cards
+    path:PATH.cards,
+    // children:[
+    //   {element: <LearnCards/>, path: PATH.learn}
+    // ]
   } ,
+  {element: <LearnCards/>, path: PATH.learn}
 
 ]
 
@@ -77,3 +83,4 @@ if(data){
 }
   return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
 }
+//<Route path="*" element={<NoMatch />} />

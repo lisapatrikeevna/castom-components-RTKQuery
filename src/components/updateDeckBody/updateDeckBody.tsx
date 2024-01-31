@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { CheckBox } from "@/components/ui/checkBox";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { useUpdateDeckMutation } from "@/services/decks/decks.servies.ts";
 import CroppedImageUploader from "@/components/ui/imageUplouder/imageUplouder.tsx";
 import { UpdateDecksArgs } from "@/pages/flashcards.types.ts";
 import s from './updateDeckBody.module.scss'
+import { name } from "clsx";
 
 type ServerErrorResponse = {
   data: {
@@ -15,62 +16,80 @@ type ServerErrorResponse = {
     }>
   }
 }
-
+type DeckItemType = {
+  author:{id: string; name: string;}
+  cardsCount: number;
+  cover: null | string;
+  created: string;
+  isPrivate: boolean;
+  id: string;
+  name: string;
+  updated: string;
+  userId: string;
+};
 type propsType={
   isOpenHandler:(isOpenValue:boolean)=>void
-  deck:any
+  deck:DeckItemType
 }
 
 const UpdateDeckBody = (props:propsType) => {
-  const [imgValue, setImgValue] = useState<Blob |string>(props.deck.cover)
-  const [deckName, setNewDeckName] = useState(props.deck.name)
-  const [privateDeck, setPrivate] = useState(false)
-  // const [addDeck, { error: addDeckError ,data }] = useCreateDeckMutation()
-  const [updateDeck, { isLoading: isUpdating ,error}] = useUpdateDeckMutation()
-  // console.log('UpdateDeckBody',props);
-  console.log('UpdateDeckBody/deck.name',  props.deck.name);
+  const [imgValue, setImgValue] = useState<Blob | string>('');
+  const [deckName, setNewDeckName] = useState('');
+  const [privateDeck, setPrivate] = useState(false);
+  const [error, setError] = useState(false);
+  const [updateDeck, { isLoading: isUpdating }] = useUpdateDeckMutation();
 
-  const onChangeCroppImage =(blob: Blob) => {
-    setImgValue(blob)
+  useEffect(() => {
+    props.deck.cover !== null && setImgValue(props.deck.cover);
+    setNewDeckName(props.deck.name);
+    setPrivate(props.deck.isPrivate);
+  }, [props.deck]);
+
+  const onChangeCroppImage = (blob: Blob) => {
+    setImgValue(blob);
   };
 
   const update = () => {
 
-    const formData = new FormData()
-    if (imgValue) {
-      formData.set('cover', imgValue)
-    }
-    formData.append('name', deckName)
+    const formData = new FormData();
+
+    const name="deckName"
+    formData.append('name', name);
+    // formData.append('name', deckName);
+    // if (imgValue.length>0 ) {
+    // // if (imgValue.length>0 || imgValue !== props.deck.cover) {
+    //   formData.append('cover', imgValue);
+    // }
     formData.append('isPrivate', privateDeck ? 'true' : 'false')
 
-    const args = {
-      cover: imgValue, name: deckName, isPrivate: privateDeck, id:props.deck.id
-    }
+    console.log('UpdateDeckBody/update/formData:', formData, props.deck.id);
 
-    console.log('!!args', args);
-    updateDeck(formData as unknown as UpdateDecksArgs).unwrap().then(() => {
-      setImgValue('')
-      setNewDeckName('')
-      setPrivate(false)
-      props.isOpenHandler(false)
-    }).catch(err=>{
-      console.log(err);
+    const arg = { formData, id: props.deck.id };
+
+    updateDeck(arg as unknown as UpdateDecksArgs).unwrap().then(() => {
+      debugger
+      setImgValue('');
+      setNewDeckName('');
+      setPrivate(false);
+      props.isOpenHandler(false);
     })
-
+    .catch(err => {
+      console.log(err);
+      setError(err.data.message);
+    });
   }
 
-
-  return (<div className={s.updateDeckWrap}>
-    <Input placeholder={'name'} label={'Deck name'} value={deckName} onChange={(e: ChangeEvent<HTMLInputElement>) => setNewDeckName(e.currentTarget.value)}/>
-    <CroppedImageUploader buttonText={'select picture'} url={imgValue}  onChange={onChangeCroppImage}/>
-    <CheckBox label={'Private deck'} checked={privateDeck} onCheckedChange={setPrivate}/>
-   <div>
-     <Button onClick={update}>update deck</Button>
-   </div>
-    {/*{addDeckError && <p>{(addDeckError as ServerErrorResponse).data.errorMessages[0].message}</p>}*/}
-  </div>);
+  return (
+    <div className={s.updateDeckWrap}>
+      <Input placeholder={'name'} label={'Deck name'} value={deckName} onChange={(e: ChangeEvent<HTMLInputElement>) => setNewDeckName(e.currentTarget.value)}/>
+      <CroppedImageUploader buttonText={'select picture'} url={imgValue} onChange={onChangeCroppImage}/>
+      <CheckBox label={'Private deck'} checked={privateDeck} onCheckedChange={setPrivate}/>
+      <div>
+        <Button onClick={update}>update deck</Button>
+      </div>
+      {error && <p>{error}</p>}
+    </div>
+  );
 };
-
-
 
 export default UpdateDeckBody;

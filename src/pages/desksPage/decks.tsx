@@ -20,6 +20,7 @@ import Portal from "@/components/ui/portal/portal.tsx";
 import { useState } from "react";
 import UpdateDeckBody from "@/components/updateDeckBody/updateDeckBody.tsx";
 import { GetDecksResponseItems } from "@/pages/flashcards.types.ts";
+import { cardItemType } from "@/services/cards/card.type.ts";
 
 
 type propsType={
@@ -41,11 +42,12 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
     setIdUpdateDeck(id)
     setIsOpen(isOpenValue)
   }
-  const getCards = (el:any) => {
+  const getCards = (el:cardItemType) => {
     dispatch(appAC.setDecksId(el.id))
     dispatch(appAC.setDecksName(el.name))
-    dispatch(appAC.setDecksImg(el.cover))
+    el.cover && dispatch(appAC.setDecksImg(el.cover))
     navigate(PATH.cards)
+    // navigate(PATH.cards,{ state: { id } })
   }
 
 

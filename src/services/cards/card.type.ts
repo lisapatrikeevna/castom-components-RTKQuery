@@ -1,30 +1,30 @@
-export type createCardType={
-  question :string
-  answer : string
-  questionImg?:string
-  answerImg?:string
-  questionVideo?:string
-  answerVideo?:string
+import { CardTypeAuthor } from "@/pages/cards/cardsPage.tsx";
 
-}
-export type cardsResponseType ={
+export type createCardType = {
+  question: string
+  answer: string
+  questionImg?: string
+  answerImg?: string
+  questionVideo?: string
+  answerVideo?: string
 
 }
 export type GetCardsType = {
-  grade: number;
+  grade: number; id: string; deckId: string; userId: string; question: string; answer: string; shots: number; answerImg: string; questionImg: string; questionVideo: string; answerVideo: string; created: string; updated: string;
+}
+export type ArgCreateCardType = {}
+export type getCardsResponseType = {
+  grade: number; id: string; deckId: string; userId: string; question: string; answer: string; shots: number; answerImg: string; questionImg: string; questionVideo: string; answerVideo: string; created: string; updated: string;
+}
+export type cardItemType = {
+  author: CardTypeAuthor;
   id: string;
-  deckId: string;
   userId: string;
-  question: string;
-  answer: string;
+  name: string;
+  isPrivate: boolean;
   shots: number;
-  answerImg: string;
-  questionImg: string;
-  questionVideo: string;
-  answerVideo: string;
+  cover?: string;
   created: string;
   updated: string;
-}
-export type ArgCreateCardType={
-
+  cardsCount: number;
 }

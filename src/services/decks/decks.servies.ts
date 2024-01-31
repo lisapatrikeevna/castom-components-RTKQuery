@@ -12,9 +12,11 @@ const decksServiece=baseApi.injectEndpoints({
       invalidatesTags:['Decks'],
     }),
     updateDeck: builder.mutation<void, UpdateDecksArgs>({
-      query: arg => {
-        console.log(arg);
-        return {body: {cover:arg.cover,name:arg.name, isPrivate:arg.isPrivate}, method: 'PATCH', url: `v1/decks/${arg.id}`,}
+      query: (arg) => {
+        console.log('!!!!!updateDeck arg', arg,arg.id);
+        debugger
+        return {body: {cover:arg.cover, name:arg.name, isPrivate:arg.isPrivate},
+          method: 'PATCH', url: `v1/decks/${arg.id}`,}
       },
       invalidatesTags:['Decks']
     }),
