@@ -39,7 +39,10 @@ const CroppedImageUploader = ({onChange, ...props}: Props) => {
   };
 
   const imageCropped = (blob: Blob) => {
-    setUrl(blob)
+
+    console.log(blob)
+    setUrl(URL.createObjectURL(blob))
+
     const fileImg = new File([blob], file.name, {type:file.type});
     console.log('imageCropped', fileImg);
     onChange(fileImg);

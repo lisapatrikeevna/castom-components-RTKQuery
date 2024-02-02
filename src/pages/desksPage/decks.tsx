@@ -89,15 +89,14 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
                               deck={el}/>} openBtn={
                               <Button iconBtn={true} title={'edit cards'}
                                       onClick={
-                                ()=> {
-                                  console.log('el',el.name)
+                                ()=> {console.log('el',el.name)
                                   isOpenHandler(true, el.id)
                                 }
                               }
                                       // onClick={isOpenHandler}
                               ><EditIcon colorFill={'#fff'}/></Button>}/>
 
-                    <Button iconBtn={true} title={'delete cards'} onClick={()=>removeDeck(el.id)}><TrashIcon colorFill={'#fff'}/></Button>
+                    <Button iconBtn={true} title={'delete cards'} onClick={()=>removeDeck(el.id)} disabled={isRemoved}><TrashIcon colorFill={'#fff'}/></Button>
                   </>}
                   </div>
                 </TableCell>

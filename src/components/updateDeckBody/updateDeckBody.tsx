@@ -52,22 +52,13 @@ const UpdateDeckBody = (props:propsType) => {
   const update = () => {
 
     const formData = new FormData();
+    formData.append('name', deckName);
+    if (imgValue.length>0 || imgValue !== props.deck.cover) {
+      formData.append('cover', imgValue);
+    }
+    formData.append('isPrivate', privateDeck ? 'true' : 'false');
 
-    const name="deckName"
-    formData.append('name', name);
-    // formData.append('name', deckName);
-    // if (imgValue.length>0 ) {
-    // // if (imgValue.length>0 || imgValue !== props.deck.cover) {
-    //   formData.append('cover', imgValue);
-    // }
-    formData.append('isPrivate', privateDeck ? 'true' : 'false')
-
-    console.log('UpdateDeckBody/update/formData:', formData, props.deck.id);
-
-    const arg = { formData, id: props.deck.id };
-
-    updateDeck(arg as unknown as UpdateDecksArgs).unwrap().then(() => {
-      debugger
+    updateDeck({id: props.deck.id, body: formData as unknown as UpdateDecksArgs}).unwrap().then(() => {
       setImgValue('');
       setNewDeckName('');
       setPrivate(false);

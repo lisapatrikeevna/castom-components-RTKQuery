@@ -6,7 +6,7 @@ import { useCreateDeckMutation } from "@/services/decks/decks.servies.ts";
 import CroppedImageUploader from "@/components/ui/imageUplouder/imageUplouder.tsx";
 import { CreateDecksArgs } from "@/pages/flashcards.types.ts";
 
-type imgType=Blob|File|string
+type imgType=File | Blob | string
 type propsType={
   isOpenHandler:(isOpenValue:boolean)=>void
 }
@@ -14,22 +14,24 @@ const AddNewDeckBody = (props:propsType) => {
   const [imgValue, setImgValue] = useState<imgType>('')
   const [newDeckName, setNewDeckName] = useState('')
   const [privateDeck, setPrivate] = useState(false)
-  const [addDeck, { error: addDeckError ,data }] = useCreateDeckMutation()
-
+  const [addDeck, { error: addDeckError ,data , isLoading, isSuccess}] = useCreateDeckMutation()
 
   const onChangeCroppImage =(file: imgType) => {
-     // console.log('AddNewDeckBody/file', file);
+     console.log('AddNewDeckBody/imgValue', imgValue);
+     console.log('AddNewDeckBody/file', file);
     setImgValue(file)
   };
 
   const createNewDeck = () => {
 
-    const formData = new FormData()
+    const formData = new FormData();
     if (imgValue) {
       formData.set('cover', imgValue)
     }
     formData.append('name', newDeckName)
-    formData.append('isPrivate', privateDeck ? 'true' : 'false')
+    formData.append('isPrivate', privateDeck ? 'true' : 'false');
+
+    console.log({formData});
 
     // console.log('AddNewDeckBody/ createNewDeck/formData:' , formData);
     // console.log('AddNewDeckBody/createNewDeck /imgValue:' , imgValue);
@@ -50,7 +52,7 @@ const AddNewDeckBody = (props:propsType) => {
     <CroppedImageUploader buttonText={'select picture'} url={imgValue}  onChange={onChangeCroppImage}/>
     <CheckBox label={'Private deck'} checked={privateDeck} onCheckedChange={setPrivate}/>
    <div>
-     <Button onClick={createNewDeck}>add deck</Button>
+     <Button onClick={createNewDeck} disabled={isLoading}>add deck</Button>
    </div>
     {addDeckError && <p>{(addDeckError as ServerErrorResponse).data.errorMessages[0].message}</p>}
   </div>);

@@ -1,6 +1,5 @@
-import InfoIcon from "../../../../../flash_cards_2/src/assets/icons/InfoIcon.tsx";
 import type { Meta, StoryObj } from '@storybook/react'
-import {ReactNode} from "react";
+import ReactNode from "react";
 
 import { Card } from './'
 

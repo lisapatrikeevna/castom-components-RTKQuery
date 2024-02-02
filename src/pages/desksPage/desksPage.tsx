@@ -6,40 +6,45 @@ import { Slider } from "@/components/ui/slider";
 import { TrashIcon } from "@/assets";
 import { Decks } from "@/pages/desksPage/decks.tsx";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootStateType } from "@/services/store.ts";
 import Portal from "@/components/ui/portal/portal.tsx";
 import AddNewDeckBody from "@/components/addNewDeckBody/addNewDeckBody.tsx";
 import { Pagination } from "@/components/ui/pagination/pagination.tsx";
 import { useGetDecksQuery } from "@/services/decks/decks.servies.ts";
 import { Typography } from "@/components/ui/typography";
-
+import { deckAC } from "@/services/decks/decks.slice.ts";
 
 
 const DesksPage = () => {
-
+  const dispatch = useDispatch()
   const userId = useSelector<RootStateType, string>(state => state.app.user.id)
+  const currentPage = useSelector<RootStateType, number>(state => state.decks.currentPage)
+  const itemsPerPage = useSelector<RootStateType, number>(state => state.decks.perPage)
 
   const [sliderValue, setSliderValue] = useState([0, 100])
   const [searchValue, setSearchValue] = useState('')
   const [tabSwitcherValue, setTabSwitcherValue] = useState('all')
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [itemsPerPage, setItemsPerPage] = useState<number>(10)
-  const [isOpen, setIsOpen] = useState<boolean|null>(null)
+  const [isOpen, setIsOpen] = useState<boolean | null>(null)
   const selectOptions = ['10', '20', '50', '100']
   const {data: decksData, error} = useGetDecksQuery({currentPage, minCardsCount: sliderValue[0], maxCardsCount: sliderValue[1], name: searchValue, itemsPerPage, ...(tabSwitcherValue !== 'all' ? {authorId: userId} : {})})
-  useEffect(() => decksData && setCurrentPage(decksData.pagination.currentPage), [decksData])
+  useEffect(() => setCurrentPage, [decksData])
   const arrBtnTabSwitcher = [{name: 'My Cards', value: 'me'}, {name: 'All Cards', value: 'all'}]
-  useEffect(() => {setCurrentPage(1)}, [sliderValue, searchValue])
+  useEffect(() => { dispatch(deckAC.setCurrentPage(1))}, [sliderValue, searchValue])
   const clearFilterHandler = () => {
-    setCurrentPage(1)
+    dispatch(deckAC.setCurrentPage(1))
     setSliderValue([0, 100])
     clearInputHandler()
+  }
+  const setCurrentPage = () => {
+    decksData && dispatch(deckAC.setCurrentPage(decksData.pagination.currentPage) )
   }
   const searchValueHandler = (e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.currentTarget.value)
   const clearInputHandler = () => setSearchValue('')
   const tabSwitcherHandler = (dataBtn: TabSwitcherBtnType) => setTabSwitcherValue(dataBtn.value)
   const isOpenHandler = (isOpenValue: boolean) => setIsOpen(isOpenValue)
+  const handlePageChange = (pageNumber: number) =>   dispatch(deckAC.setCurrentPage(pageNumber))
+  const handleSetItemsPerPage = (numPerPage: number) =>   dispatch(deckAC.setPerPage(numPerPage))
 
   // isLoading - первая загрузка, когда нет данных
   // isFetching - обновление данных, например при возвращении на вкладку
@@ -69,7 +74,7 @@ const DesksPage = () => {
     </div>
     {error && <p>useGetDecksQuery: {error.toString()}</p>}
     {decksData && <Decks userId={userId} items={decksData.items}/>}
-    <Pagination currentPage={currentPage} handlePageChange={(pageNumber: number) => setCurrentPage(pageNumber)} handleSetItemsPerPage={(numItemsPerPage: number) => setItemsPerPage(numItemsPerPage)} itemsPerPage={itemsPerPage} selectOptions={selectOptions} totalCount={decksData?.maxCardsCount} totalPages={decksData?.pagination.totalPages}/>
+    <Pagination currentPage={currentPage} handlePageChange={handlePageChange} handleSetItemsPerPage={handleSetItemsPerPage} itemsPerPage={itemsPerPage} selectOptions={selectOptions} totalCount={decksData?.maxCardsCount} totalPages={decksData?.pagination.totalPages}/>
   </>
 }
 

@@ -1,52 +1,51 @@
-*{
-color: #FFFEFE;;
+* {
+  color: #fffefe;
 }
 
 .card {
-  position:relative;
+  position: relative;
   width: 420px;
   min-height: 552px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border:1px solid #313131;
-  box-shadow: -1px -1px 2px 0px #0000001A;
-  border-radius:2px;
+  border: 1px solid #313131;
+  box-shadow: -1px -1px 2px 0px #0000001a;
+  border-radius: 2px;
   &:hover {
     outline: 2px solid var(--color-info-500);
   }
-
 }
-.cardHeader{
-    position: absolute;
-    top: 0;
-    left: 0;
-font-size: 24px;
-font-weight: 600;
-padding:0 12px;
-word-wrap: break-word;
-width:100%;
-display: inline-flex;
-}
-
-.body{
- padding: 44px 12px 30px;
- width: 100%;
- height: -webkit-fill-available;
- border:1px solid #8c61ff;;
+.cardHeader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 0 12px;
+  word-wrap: break-word;
+  width: 100%;
+  display: inline-flex;
 }
 
-.width{
-width: 420px;
+.body {
+  padding: 44px 12px 30px;
+  width: 100%;
+  height: -webkit-fill-available;
+  border: 1px solid #8c61ff;
 }
-.iconSize{
-width:20px;
-margin:7px;
+
+.width {
+  width: 420px;
+}
+.iconSize {
+  width: 20px;
+  margin: 7px;
 }
 .dark {
-  background-color:  var(--color-dark-700) ;
-//   background-color: dark700;
+  background-color: var(--color-dark-700);
+  //   background-color: dark700;
 }
 
 .light {
@@ -55,6 +54,5 @@ margin:7px;
 
 .white {
   background-color: #fff;
-  color:var(--color-dark-700);
+  color: var(--color-dark-700);
 }
-

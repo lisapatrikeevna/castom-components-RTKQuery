@@ -9,7 +9,6 @@ const cardsServiece=baseApi.injectEndpoints({
   return {
     getCardById: builder.query<getCardsResponseType, string>({
       query: (id) => {
-        debugger
         return {url: `v1/cards/${id}`,}
       },
     }),

@@ -2,6 +2,7 @@ import { baseApi } from '@/services/base-api'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { appReducer } from "@/services/app.slice.ts";
+import { deckReducer } from "@/services/decks/decks.slice.ts";
 
 export const store = configureStore({
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
@@ -12,7 +13,7 @@ export const store = configureStore({
     app: appReducer,
     // auth: authReducer,
     // packs: packsReducer,
-    // counter: counterReducer,
+    decks: deckReducer,
     // [cardsApi.reducerPath]: cardsApi.reducer
   },
 })

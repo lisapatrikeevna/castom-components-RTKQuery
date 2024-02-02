@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Cropper from "react-easy-crop";
 import { Point, Area } from "react-easy-crop";
 import s from './styles.module.scss'
@@ -33,11 +33,15 @@ const ImageCropperModal = ({onOk, closeModal, image}: propsType) => {
     try {
       const croppedImage = await getCroppedImg(blobUrl, croppedAreaPixels, rotation)
       // setCroppedImage(croppedImage)
-      if( croppedImage ) {
-        onOk(croppedImage)
-        closeModal(false)
+
+
+        if( croppedImage ) {
+          onOk(croppedImage)
+          closeModal(false)
+        }
       }
-    } catch( e ) {
+
+    catch( e ) {
       console.error(e);
     }
   };

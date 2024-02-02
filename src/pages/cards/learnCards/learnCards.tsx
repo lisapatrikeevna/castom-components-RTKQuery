@@ -39,11 +39,11 @@ const LearnCards = () => {
         <Typography as={'h3'} title={'Learn JS-CARDS'}>Learn JS-CARDS </Typography>
         <Typography as={'h3'} title={'Question'}>Question : {data.question}</Typography>
         {data.questionImg && <div className={s.imgWrap}><img alt={'Question'} src={data.questionImg}/></div>}
-        <Button fullWidth={true} onClick={()=>{}}>Show answer</Button>
+        <Button fullWidth={true} onClick={()=>{}} className={s.button}>Show answer</Button>
         <Typography as={'h3'} title={'Question'}>Question : {data.answer}</Typography>
         {data.answerImg && <div className={s.imgWrap}><img alt={'Question'} src={data.answerImg}/></div>}
 
-        <Button fullWidth={true} onClick={()=>learn(data.id)}>next question</Button>
+        <Button fullWidth={true} onClick={()=>learn(data.id)} className={s.button}>next question</Button>
       </Card>
     </div>
     </div>);
