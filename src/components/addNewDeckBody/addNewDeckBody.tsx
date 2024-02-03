@@ -17,8 +17,8 @@ const AddNewDeckBody = (props:propsType) => {
   const [addDeck, { error: addDeckError ,data , isLoading, isSuccess}] = useCreateDeckMutation()
 
   const onChangeCroppImage =(file: imgType) => {
-     console.log('AddNewDeckBody/imgValue', imgValue);
-     console.log('AddNewDeckBody/file', file);
+     console.log('AddNewDeckBody/CropImage/imgValue', imgValue);
+     console.log('AddNewDeckBody/CropImage/file', file);
     setImgValue(file)
   };
 

@@ -18,7 +18,13 @@ const CroppedImageUploader = ({onChange, ...props}: Props) => {
   // const [url, setUrl] = useState(props.url || '')
   const [file, setFile] = useState({}as File)
 
-  useEffect(()=>setUrl(props.url? props.url : ''),[])
+  useEffect(()=> {
+    console.log('props.url', props.url );
+    if( props.url && (typeof props.url === 'Blob' || typeof props.url === 'string')  ){
+      setUrl( props.url)
+    }
+    // setUrl(props.url ? props.url : '')
+  },[props])
   // console.log('imageSelected/url', url);
 
 

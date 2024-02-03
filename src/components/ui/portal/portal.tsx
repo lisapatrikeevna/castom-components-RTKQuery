@@ -18,7 +18,7 @@ type propsType = {
 }
 const Portal = (props: propsType) => {
   const [portalVisible, setPortalVisible] = useState(false);
-  console.log('portalVisible', portalVisible);
+  // console.log('portalVisible', portalVisible);
   useEffect(()=>{
    if( props.isOpen !== undefined){
    // if(props.isOpen !== null || props.isOpen !== undefined){
