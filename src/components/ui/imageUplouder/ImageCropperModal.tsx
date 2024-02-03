@@ -34,7 +34,6 @@ const ImageCropperModal = ({onOk, closeModal, image}: propsType) => {
       const croppedImage = await getCroppedImg(blobUrl, croppedAreaPixels, rotation)
       // setCroppedImage(croppedImage)
 
-
         if( croppedImage ) {
           onOk(croppedImage)
           closeModal(false)

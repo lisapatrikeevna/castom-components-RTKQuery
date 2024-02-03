@@ -18,21 +18,20 @@ type propsType = {
 }
 const Portal = (props: propsType) => {
   const [portalVisible, setPortalVisible] = useState(false);
-
+  console.log('portalVisible', portalVisible);
   useEffect(()=>{
-   if(props.isOpen !== null || props.isOpen !== undefined){
+   if( props.isOpen !== undefined){
+   // if(props.isOpen !== null || props.isOpen !== undefined){
      setPortalVisible(props.isOpen)
    }
-   return
-   },[props.isOpen])
-  const handlePortalOpen = () => setPortalVisible(true);
-  const handlePortalClose = () => setPortalVisible(false);
+   },[props])
+  const handlePortalVisible = () => setPortalVisible(!portalVisible);
 
 
   return (<div>
-    {props.textBtnOpen && <Button onClick={handlePortalOpen}>{props.textBtnOpen}</Button>}
+    {props.textBtnOpen && <Button onClick={handlePortalVisible}>{props.textBtnOpen}</Button>}
     {props.openBtn && props.openBtn}
-    {portalVisible && createPortal(<PortalComponent onClose={handlePortalClose} text={props.text} title={props.title} textBtnClose={props.textBtnClose} portalWrapClass={props.portalWrapClass} children={props.children}/>, document.body)}
+    {portalVisible && createPortal(<PortalComponent onClose={handlePortalVisible} text={props.text} title={props.title} textBtnClose={props.textBtnClose} portalWrapClass={props.portalWrapClass} children={props.children}/>, document.body)}
     </div>);
 };
 

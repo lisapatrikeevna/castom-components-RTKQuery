@@ -58,7 +58,7 @@ const DesksPage = () => {
     <div className={`${s.flexBox}  ${s.pageHeader}`}>
 
       <Typography as={'h2'} className={s.pageTitle}>Packs list</Typography>
-      <Portal title={'Add New Deck'} textBtnOpen={'Add New Pack'} portalWrapClass={s.portalWrapClass} isOpen={isOpen} children={<AddNewDeckBody isOpenHandler={isOpenHandler}/>}/>
+      <Portal title={'Add New Deck'} textBtnOpen={'Add New Pack'} portalWrapClass={s.portalWrapClass} isOpen={false} children={<AddNewDeckBody isOpenHandler={isOpenHandler}/>}/>
 
     </div>
     <div className={`${s.flexBox} ${s.filterWrap}`}>
@@ -74,7 +74,8 @@ const DesksPage = () => {
     </div>
     {error && <p>useGetDecksQuery: {error.toString()}</p>}
     {decksData && <Decks userId={userId} items={decksData.items}/>}
-    <Pagination currentPage={currentPage} handlePageChange={handlePageChange} handleSetItemsPerPage={handleSetItemsPerPage} itemsPerPage={itemsPerPage} selectOptions={selectOptions} totalCount={decksData?.maxCardsCount} totalPages={decksData?.pagination.totalPages}/>
+    {/*<Pagination currentPage={currentPage} handlePageChange={handlePageChange} handleSetItemsPerPage={handleSetItemsPerPage} itemsPerPage={itemsPerPage} selectOptions={selectOptions} totalCount={decksData?.maxCardsCount} totalPages={decksData?.pagination.totalPages}/>*/}
+    <Pagination currentPage={currentPage} handlePageChange={handlePageChange} handleSetItemsPerPage={handleSetItemsPerPage} itemsPerPage={itemsPerPage} selectOptions={selectOptions} totalCount={decksData?.pagination.totalItems} totalPages={decksData?.pagination.totalPages}/>
   </>
 }
 

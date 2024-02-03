@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Uploader from './uploader.tsx';
 import ImageCropperModal from '@/components/ui/imageUplouder/ImageCropperModal.tsx';
 import { Button } from "@/components/ui/button";
@@ -14,24 +14,29 @@ interface Props {
 
 const CroppedImageUploader = ({onChange, ...props}: Props) => {
   const [cropPicture, setCropPicture] = useState(false)
-  const [url, setUrl] = useState(props.url || '')
+  const [url, setUrl] = useState<Blob | string>('')
+  // const [url, setUrl] = useState(props.url || '')
   const [file, setFile] = useState({}as File)
+
+  useEffect(()=>setUrl(props.url? props.url : ''),[])
+  // console.log('imageSelected/url', url);
+
 
   const imageSelected = async (file:File) => {
     let imageDataUrl = await readFile(file)
     console.log('imageSelected/file', file);
-    try {
-      // !!!!!!  apply rotation if needed  !!!!!!!
-      // const orientation = await getOrientation(file)
-      // const rotation = ORIENTATION_TO_ANGLE[orientation]
-      // if( rotation ) {
-      if( imageDataUrl ) {
-        //!!! imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
-        imageDataUrl = await getRotatedImage(imageDataUrl, 0)
-      }
-    } catch( e ) {
-      console.warn('failed to detect the orientation')
-    }
+    // try {
+    //   !!!!!!  apply rotation if needed  !!!!!!!
+    //   const orientation = await getOrientation(file)
+    //   const rotation = ORIENTATION_TO_ANGLE[orientation]
+    //   if( rotation ) {
+    //   if( imageDataUrl ) {
+    //     //!!! imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
+    //     imageDataUrl = await getRotatedImage(imageDataUrl, 0)
+    //   }
+    // } catch( e ) {
+    //   console.warn('failed to detect the orientation')
+    // }
 
     setUrl(imageDataUrl)
     setFile(file)
@@ -44,6 +49,9 @@ const CroppedImageUploader = ({onChange, ...props}: Props) => {
     setUrl(URL.createObjectURL(blob))
 
     const fileImg = new File([blob], file.name, {type:file.type});
+    const test = new FileReader()
+    const res=test.readAsDataURL(blob)
+    console.log('imageCropped/res', res);
     console.log('imageCropped', fileImg);
     onChange(fileImg);
   };

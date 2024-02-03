@@ -26,7 +26,8 @@ type DeckItemType = {
   name: string;
   updated: string;
   userId: string;
-};
+}
+
 type propsType={
   isOpenHandler:(isOpenValue:boolean)=>void
   deck:DeckItemType
@@ -41,6 +42,7 @@ const UpdateDeckBody = (props:propsType) => {
 
   useEffect(() => {
     props.deck.cover !== null && setImgValue(props.deck.cover);
+    // props.deck.cover !== null && setImgValue(props.deck.cover);
     setNewDeckName(props.deck.name);
     setPrivate(props.deck.isPrivate);
   }, [props.deck]);
