@@ -63,8 +63,7 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
             <TableHeadCell></TableHeadCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {items.map(el => {
+        <TableBody>{items.map(el => {
             // console.log("userId==el.author.id", userId == el.userId);
             return (
               <TableRow key={el.id}>
@@ -82,12 +81,9 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
                   <Button iconBtn={true} title={'play'} onClick={()=>getCards(el)}><PlayIcon colorFill={'#fff'}/></Button>
                   {userId ==el.userId &&
                   <>
-                    <Portal title={'Edit Deck'}
-                            isOpen={idUpdateDeck===el.id && isOpen}
-                            children={<UpdateDeckBody
-                              isOpenHandler={setIsOpen}
-                              deck={el}/>} openBtn={
-                              <Button iconBtn={true} title={'edit cards'}
+                    <Portal title={'Edit Deck'} isOpen={idUpdateDeck===el.id && isOpen}
+                            children={<UpdateDeckBody isOpenHandler={setIsOpen} deck={el}/>}
+                            openBtn={<Button iconBtn={true} title={'edit cards'}
                                       onClick={
                                 ()=> {console.log('el',el.name)
                                   isOpenHandler(true, el.id)

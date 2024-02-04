@@ -14,6 +14,8 @@ import { Pagination } from "@/components/ui/pagination/pagination.tsx";
 import { useGetDecksQuery } from "@/services/decks/decks.servies.ts";
 import { Typography } from "@/components/ui/typography";
 import { deckAC } from "@/services/decks/decks.slice.ts";
+import InfoIcon from "@/assets/icons/InfoIcon.tsx";
+import MyPackDialog from "@/components/myPackDialog/myPackDialog.tsx";
 
 
 const DesksPage = () => {
@@ -26,9 +28,10 @@ const DesksPage = () => {
   const [searchValue, setSearchValue] = useState('')
   const [tabSwitcherValue, setTabSwitcherValue] = useState('all')
   const [isOpen, setIsOpen] = useState<boolean | null>(null)
+  const [isOpenDialog, setIsOpenDialog] = useState(false)
   const selectOptions = ['10', '20', '50', '100']
+
   const {data: decksData, error} = useGetDecksQuery({currentPage, minCardsCount: sliderValue[0], maxCardsCount: sliderValue[1], name: searchValue, itemsPerPage, ...(tabSwitcherValue !== 'all' ? {authorId: userId} : {})})
-  useEffect(() => setCurrentPage, [decksData])
   const arrBtnTabSwitcher = [{name: 'My Cards', value: 'me'}, {name: 'All Cards', value: 'all'}]
   useEffect(() => { dispatch(deckAC.setCurrentPage(1))}, [sliderValue, searchValue])
   const clearFilterHandler = () => {
@@ -36,16 +39,15 @@ const DesksPage = () => {
     setSliderValue([0, 100])
     clearInputHandler()
   }
-  const setCurrentPage = () => {
-    decksData && dispatch(deckAC.setCurrentPage(decksData.pagination.currentPage) )
-  }
   const searchValueHandler = (e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.currentTarget.value)
   const clearInputHandler = () => setSearchValue('')
   const tabSwitcherHandler = (dataBtn: TabSwitcherBtnType) => setTabSwitcherValue(dataBtn.value)
   const isOpenHandler = (isOpenValue: boolean) => setIsOpen(isOpenValue)
-  const handlePageChange = (pageNumber: number) =>   dispatch(deckAC.setCurrentPage(pageNumber))
-  const handleSetItemsPerPage = (numPerPage: number) =>   dispatch(deckAC.setPerPage(numPerPage))
-
+  const handlePageChange = (pageNumber: number) => dispatch(deckAC.setCurrentPage(pageNumber))
+  const handleSetItemsPerPage = (numPerPage: number) => dispatch(deckAC.setPerPage(numPerPage))
+  const openDialog = () => {
+    setIsOpenDialog(!isOpenDialog)
+  }
   // isLoading - первая загрузка, когда нет данных
   // isFetching - обновление данных, например при возвращении на вкладку
   // Иными словами isLoading === true только при изначальной загрузке, а isFetching - при любом запросе
@@ -53,11 +55,15 @@ const DesksPage = () => {
   // При isLoading мы показываем крутилки/скелетоны, при isFetching дизейблим пагинацию, как пример
 
 
-  return <>
+  return <div className={s.container}>
 
     <div className={`${s.flexBox}  ${s.pageHeader}`}>
 
-      <Typography as={'h2'} className={s.pageTitle}>Packs list</Typography>
+      <div className={s.titleWrap}>
+        <Typography as={'h2'} className={s.pageTitle}>Packs list</Typography>
+        <Button iconBtn={true} onClick={openDialog} title={'info'} className={s.infoBtn}><InfoIcon/></Button>
+        {isOpenDialog && <MyPackDialog/>}
+      </div>
       <Portal title={'Add New Deck'} textBtnOpen={'Add New Pack'} portalWrapClass={s.portalWrapClass} isOpen={false} children={<AddNewDeckBody isOpenHandler={isOpenHandler}/>}/>
 
     </div>
@@ -76,7 +82,7 @@ const DesksPage = () => {
     {decksData && <Decks userId={userId} items={decksData.items}/>}
     {/*<Pagination currentPage={currentPage} handlePageChange={handlePageChange} handleSetItemsPerPage={handleSetItemsPerPage} itemsPerPage={itemsPerPage} selectOptions={selectOptions} totalCount={decksData?.maxCardsCount} totalPages={decksData?.pagination.totalPages}/>*/}
     <Pagination currentPage={currentPage} handlePageChange={handlePageChange} handleSetItemsPerPage={handleSetItemsPerPage} itemsPerPage={itemsPerPage} selectOptions={selectOptions} totalCount={decksData?.pagination.totalItems} totalPages={decksData?.pagination.totalPages}/>
-  </>
+  </div>
 }
 
 export default DesksPage;

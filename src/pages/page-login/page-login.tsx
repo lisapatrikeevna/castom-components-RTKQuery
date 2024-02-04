@@ -34,15 +34,6 @@ export const PageLogin = () => {
   // if( isLoading ) return <div>Loading...</div>
   // if( data ) return <Navigate to="/"/>
 
-  // const handleSignIn1 = async (data: FormType) => {
-  //   console.log(data);
-  //  try{
-  //    await signIn(data)
-  //    navigate('/')
-  //   }catch( e ) {
-  //    console.log(e);
-  //  }
-  // }
   const handleSignIn = (data: FormType) => {
     console.log(data);
     signIn(data)

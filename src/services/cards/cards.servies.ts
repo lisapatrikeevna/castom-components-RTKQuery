@@ -24,7 +24,6 @@ const cardsServiece=baseApi.injectEndpoints({
     }),
     learnCard: builder.mutation<CardResponseType, {cardId:string,grade:number}>({
       query: ({cardId, grade }) => {
-        debugger
         return { method: "POST", url: `v1/decks/${cardId}/learn`, body: { cardId ,grade } };
       },
     }),
@@ -40,27 +39,3 @@ const cardsServiece=baseApi.injectEndpoints({
 export const { useGetCardsQuery, useGetCardByIdQuery, useLearnCardMutation } = cardsServiece
 
 
-
-// import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-//
-// const initialState = {
-//   itemsPerPage: 10,
-//   currentPage: 1,
-//   searchByName: '',
-// }
-//
-// export const decksSlice = createSlice({
-//   initialState,
-//   name: 'decksSlice',
-//   reducers: {
-//     setItemsPerPage: (state, action: PayloadAction<number>) => {
-//       state.itemsPerPage = action.payload
-//     },
-//     setCurrentPage: (state, action: PayloadAction<number>) => {
-//       state.currentPage = action.payload
-//     },
-//     setSearchByName: (state, action: PayloadAction<string>) => {
-//       state.searchByName = action.payload
-//     },
-//   },
-// })
