@@ -47,7 +47,7 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
     dispatch(appAC.setDecksName(el.name))
     el.cover && dispatch(appAC.setDecksImg(el.cover))
     navigate(PATH.cards)
-    // navigate(PATH.cards,{ state: { id } })
+    // navigate(PATH.cards,{state:{ownerId:userId} })
   }
 
 
@@ -81,7 +81,7 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
                   <Button iconBtn={true} title={'play'} onClick={()=>getCards(el)}><PlayIcon colorFill={'#fff'}/></Button>
                   {userId ==el.userId &&
                   <>
-                    <Portal title={'Edit Deck'} isOpen={idUpdateDeck===el.id && isOpen}
+                    <Portal title={'Edit Deck'} isOpen={Boolean(idUpdateDeck===el.id && isOpen)}
                             children={<UpdateDeckBody isOpenHandler={setIsOpen} deck={el}/>}
                             openBtn={<Button iconBtn={true} title={'edit cards'}
                                       onClick={

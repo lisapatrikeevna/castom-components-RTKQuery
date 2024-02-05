@@ -4,14 +4,9 @@ import PlayIcon from "@/assets/icons/playIcon.tsx";
 import TrashIcon from "@/assets/icons/trashIcon.tsx";
 import EditIcon from "@/assets/icons/editIcon.tsx";
 import Portal from "@/components/ui/portal/portal.tsx";
-import { useState } from "react";
 
 
-// type propsType = {
-//   display?: string
-// }
 const MyPackDialog = () => {
-const [isOpenCreate, setIsOpenCreate]=useState(false)
   // const style = {
   //   display: props.display
   // }

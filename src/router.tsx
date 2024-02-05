@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom'
 import PageLogin from '@/pages/page-login/page-login'
 import PageSignUp from "@/pages/sign-up/page-sign-up.tsx";
-import { Cards } from "@/components/cards/cards.tsx";
 import { useMeQuery } from "@/services/auth/auth.servies.ts";
 import DesksPage from "@/pages/desksPage/desksPage.tsx";
 import CardsPage from "@/pages/cards/cardsPage.tsx";

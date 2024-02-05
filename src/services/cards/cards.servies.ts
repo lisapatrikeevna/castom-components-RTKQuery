@@ -12,7 +12,7 @@ const cardsServiece=baseApi.injectEndpoints({
         return { url: `v1/cards/${id}` };
       },
     }),
-    getCards: builder.query<void, string>({
+    getCards: builder.query<any, string>({
       query: (id) => {
         return {
           method: "GET",
