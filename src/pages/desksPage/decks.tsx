@@ -46,8 +46,8 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
     dispatch(appAC.setDecksId(el.id))
     dispatch(appAC.setDecksName(el.name))
     el.cover && dispatch(appAC.setDecksImg(el.cover))
-    navigate(PATH.cards)
-    // navigate(PATH.cards,{state:{ownerId:userId} })
+    // navigate(PATH.cards)
+    navigate(PATH.cards,{state:{ownerId:el.userId} })
   }
 
 

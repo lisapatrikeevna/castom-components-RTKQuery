@@ -59,7 +59,8 @@ const LearnCards = () => {
 
   return (<div>
 
-      <Button onClick={() => navigate(-1)}>back to deck</Button>
+      <span onClick={() => navigate(-1)}>&#10229; <> back to deck </></span>
+      {/*<Button onClick={() => navigate(-1)}>back to deck</Button>*/}
       <div className={s.container}>
 
         <Card className={s.wrapCard}>

@@ -5,7 +5,7 @@ import { baseQueryWithReauth } from "@/services/base-query-with-reauth.ts";
 // fetchBaseQuery-выполняет функции axios
 export const baseApi = createApi({
   reducerPath: 'baseApi',
-  tagTypes:['Decks','Me'],
+  tagTypes:['Decks','Me','Cards'],
   // baseQuery: fetchBaseQuery({
   //   baseUrl: 'https://api.flashcards.andrii.es',
   //   credentials: 'include',

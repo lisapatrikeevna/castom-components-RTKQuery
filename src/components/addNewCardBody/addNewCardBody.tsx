@@ -1,45 +1,50 @@
 import { ChangeEvent, useState } from 'react';
-import { Input } from "@/components/ui/input";
-import { CheckBox } from "@/components/ui/checkBox";
 import { Button } from "@/components/ui/button";
 import { useCreateDeckMutation } from "@/services/decks/decks.servies.ts";
 import CroppedImageUploader from "@/components/ui/imageUplouder/imageUplouder.tsx";
 import { CreateDecksArgs } from "@/pages/flashcards.types.ts";
+import { Input } from "@/components/ui/input";
+import { useAddCardMutation } from "@/services/cards/cards.servies.ts";
+import { createCardType } from "@/services/cards/card.type.ts";
 
 type imgType=File | Blob | string
 type propsType={
-  isOpenHandler:(isOpenValue:boolean)=>void
+  deckId:string
+  // isOpenHandler:(isOpenValue:boolean)=>void
 }
-const AddNewDeckBody = (props:propsType) => {
-  const [imgValue, setImgValue] = useState<imgType>('')
-  const [newDeckName, setNewDeckName] = useState('')
-  const [privateDeck, setPrivate] = useState(false)
-  const [addDeck, { error: addDeckError ,data , isLoading, isSuccess}] = useCreateDeckMutation()
+const AddNewCardBody = ({deckId,...props}:propsType) => {
+  const [imgQuestion, setImgQuestion] = useState<imgType>('')
+  const [answerImg, setImganswer] = useState<imgType>('')
+  const [question, setQuestion] = useState('')
+  const [answer, setAnswer] = useState('')
+  const [addCard, { error: addDeckError ,data , isLoading, isSuccess} ] = useAddCardMutation()
 
+  console.log(deckId);
   const onChangeCroppImage =(file: imgType) => {
-     console.log('AddNewDeckBody/CropImage/imgValue', imgValue);
+     console.log('AddNewDeckBody/CropImage/imgValue', imgQuestion);
      console.log('AddNewDeckBody/CropImage/file', file);
-    setImgValue(file)
+      setImgQuestion(file)
   };
 
-  const createNewDeck = () => {
-
+  const createNewCard = () => {
+    console.log("question, answer, deckId", question, answer, deckId);
     const formData = new FormData();
-    if (imgValue) {
-      formData.set('cover', imgValue)
+    if (imgQuestion) {
+      formData.set('questionImg', imgQuestion)
     }
-    formData.append('name', newDeckName)
-    formData.append('isPrivate', privateDeck ? 'true' : 'false');
+    if (answerImg) {
+      formData.set('answerImg', answerImg)
+    }
+    formData.append('question', question)
+    formData.append('answer', answer)
 
     console.log({formData});
-
-    // console.log('AddNewDeckBody/ createNewDeck/formData:' , formData);
-    // console.log('AddNewDeckBody/createNewDeck /imgValue:' , imgValue);
-    addDeck(formData as unknown as CreateDecksArgs).unwrap().then(() => {
-      setImgValue('')
-      setNewDeckName('')
-      setPrivate(false)
-      props.isOpenHandler(false)
+    addCard({deckId, body:formData as unknown as createCardType}).unwrap().then(() => {
+      setImgQuestion('')
+      setQuestion('')
+      setAnswer('')
+      console.log('then', data);
+      // props.isOpenHandler(false)
     }).catch(err=>{
       console.log(err);
     })
@@ -48,11 +53,12 @@ const AddNewDeckBody = (props:propsType) => {
 
 
   return (<div style={{marginTop:7}}>
-    <Input placeholder={'name'} label={'Deck name'} value={newDeckName} onChange={(e: ChangeEvent<HTMLInputElement>) => setNewDeckName(e.currentTarget.value)}/>
-    <CroppedImageUploader buttonText={'select picture'} url={imgValue}  onChange={onChangeCroppImage}/>
-    <CheckBox label={'Private deck'} checked={privateDeck} onCheckedChange={setPrivate}/>
+    <Input placeholder={'name'} label={'Question'} value={question} onChange={(e: ChangeEvent<HTMLInputElement>) => setQuestion(e.currentTarget.value)}/>
+    <CroppedImageUploader buttonText={'select picture'} url={imgQuestion}  onChange={onChangeCroppImage}/>
+    <Input placeholder={'name'} label={'Answer'} value={answer} onChange={(e: ChangeEvent<HTMLInputElement>) => setAnswer(e.currentTarget.value)}/>
+    <CroppedImageUploader buttonText={'select picture'} url={imgQuestion}  onChange={onChangeCroppImage}/>
    <div>
-     <Button onClick={createNewDeck} disabled={isLoading}>add deck</Button>
+     <Button onClick={createNewCard} disabled={isLoading}>add deck</Button>
    </div>
     {addDeckError && <p>{(addDeckError as ServerErrorResponse).data.errorMessages[0].message}</p>}
   </div>);
@@ -68,6 +74,6 @@ type ServerErrorResponse = {
   }
 }
 
-export default AddNewDeckBody;
+export default AddNewCardBody;
 
 
