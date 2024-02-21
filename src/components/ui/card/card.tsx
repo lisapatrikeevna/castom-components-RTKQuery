@@ -11,6 +11,7 @@ export type CardProps = {
     title?: titleType
     width?: string
     className?: string
+    classNameBody?: string
 } & ComponentPropsWithoutRef<"div">
 
 export const Card = (props: CardProps) => {
@@ -18,16 +19,16 @@ export const Card = (props: CardProps) => {
     const sizeCard = {
         width: props.width
     }
-
+    console.log('Card props', props);
     return (
-        <div {...rest} className={`${s.card} ${s[variant]} ${className}`} style={sizeCard}>
+        <div {...rest} className={`${s.card} ${s[variant]} ${className? className:''}`} style={sizeCard}>
             {props.title &&
                 <div className={s.cardHeader}>
                     {props.title.iconElement && <div className={s.iconSize}>{props.title.iconElement}</div>}
                     <h3>{props.title.text}</h3>
                 </div>}
 
-            {props.children && <div className={s.body}>{props.children}</div>}
+            {props.children && <div className={`${s.body}  ${props.classNameBody?props.classNameBody:''}`}>{props.children}</div>}
         </div>
     )
 }

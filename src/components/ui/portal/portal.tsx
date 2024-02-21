@@ -13,25 +13,21 @@ type propsType = {
   textBtnOpen?:string
   textBtnClose?:string
   portalWrapClass?: string
+  classNameBody?: string
   isOpen?:boolean
   openBtn?:ReactNode
 }
 const Portal = (props: propsType) => {
   const [portalVisible, setPortalVisible] = useState(false);
   // console.log('portalVisible', portalVisible);
-  useEffect(()=>{
-   if( props.isOpen ){
-   // if(props.isOpen !== null || props.isOpen !== undefined){
-     setPortalVisible(props.isOpen)
-   }
-   },[props])
+  useEffect(()=>{props.isOpen !==undefined && setPortalVisible(props.isOpen)},[props])
   const handlePortalVisible = () => setPortalVisible(!portalVisible);
 
 
   return (<div>
     {props.textBtnOpen && <Button onClick={handlePortalVisible}>{props.textBtnOpen}</Button>}
     {props.openBtn && props.openBtn}
-    {portalVisible && createPortal(<PortalComponent onClose={handlePortalVisible} text={props.text} title={props.title} textBtnClose={props.textBtnClose} portalWrapClass={props.portalWrapClass} children={props.children}/>, document.body)}
+    {portalVisible && createPortal(<PortalComponent onClose={handlePortalVisible} text={props.text} title={props.title} textBtnClose={props.textBtnClose} portalWrapClass={props.portalWrapClass} classNameBody={props.classNameBody} children={props.children}/>, document.body)}
     </div>);
 };
 
@@ -45,11 +41,12 @@ type PortalComponentProps = {
   title?: string
   textBtnClose?:string
   portalWrapClass?: string
+  classNameBody?: string
 }
 const PortalComponent = (props: PortalComponentProps) => {
 
   return (<div className={s.wrap}>
-      <Card className={`${s.card} ${props.portalWrapClass}`}>
+      <Card className={`${s.card} ${props.portalWrapClass}`} classNameBody={props.classNameBody}>
         <Button onClick={props.onClose} iconBtn={true} className={s.onClose}>{props.textBtnClose? props.textBtnClose:'X'}</Button>
         <div className={s.headerWrap}>
           <Typography className={s.heading}>{props.title}</Typography>

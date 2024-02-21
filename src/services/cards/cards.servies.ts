@@ -36,6 +36,6 @@ const cardsServiece=baseApi.injectEndpoints({
 },
 })
 
-export const { useGetCardsQuery, useGetCardByIdQuery, useLearnCardMutation, useAddCardMutation } = cardsServiece
+export const { useGetCardsQuery, useGetCardByIdQuery, useLearnCardMutation, useAddCardMutation, useRemoveCardMutation } = cardsServiece
 
 

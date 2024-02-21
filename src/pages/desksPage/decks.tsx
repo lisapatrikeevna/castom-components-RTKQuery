@@ -47,7 +47,7 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
     dispatch(appAC.setDecksName(el.name))
     el.cover && dispatch(appAC.setDecksImg(el.cover))
     // navigate(PATH.cards)
-    navigate(PATH.cards,{state:{ownerId:el.userId} })
+    navigate(PATH.cards,{state:{ownerId:userId} })
   }
 
 
@@ -89,7 +89,6 @@ export const Decks = ({items,userId, ...rest}:propsType) => {
                                   isOpenHandler(true, el.id)
                                 }
                               }
-                                      // onClick={isOpenHandler}
                               ><EditIcon colorFill={'#fff'}/></Button>}/>
 
                     <Button iconBtn={true} title={'delete cards'} onClick={()=>removeDeck(el.id)} disabled={isRemoved}><TrashIcon colorFill={'#fff'}/></Button>

@@ -1,36 +1,37 @@
-import { useEffect, useState } from 'react';
-import * as Uploader from './uploader.tsx';
-import ImageCropperModal from '@/components/ui/imageUplouder/ImageCropperModal.tsx';
+import { useEffect, useState } from "react";
+import * as Uploader from "./uploader.tsx";
+import ImageCropperModal from "@/components/ui/imageUplouder/ImageCropperModal.tsx";
 import { Button } from "@/components/ui/button";
-import s from './styles.module.scss'
+import s from "./styles.module.scss";
 import { getRotatedImage, readFile } from "@/helpers.ts";
 
 interface Props {
-  buttonText: string
-  onChange: (blob: Blob) => void
-  url: string | Blob
+  buttonText: string;
+  onChange: (blob: Blob) => void;
+  url: string;
 }
 
-
-const CroppedImageUploader = ({onChange, ...props}: Props) => {
-  const [cropPicture, setCropPicture] = useState(false)
-  const [url, setUrl] = useState<Blob | string>('')
+const CroppedImageUploader = ({ onChange, ...props }: Props) => {
+  const [cropPicture, setCropPicture] = useState(false);
+  const [url, setUrl] = useState("");
   // const [url, setUrl] = useState(props.url || '')
-  const [file, setFile] = useState({} as File)
+  const [file, setFile] = useState({} as File);
 
-  useEffect(() => {
-    console.log('props.url', props.url);
-    if( props.url && (typeof props.url === 'Blob' || typeof props.url === 'string') ) {
-      setUrl(props.url)
-    }
-    // setUrl(props.url ? props.url : '')
-  }, [props])
-  // console.log('imageSelected/url', url);
+   useEffect(() => {
+   // console.log("props.url", props.url);//File{name: 'f3.png', lastModified: 1585342045831,
+     // lastModifiedDate: Fri Mar 27 2020 21:47:25 GMT+0100 (Центральная Европа, стандартное время),
+     // webkitRelativePath: '', size: 248502, type:"image/png"}
+   // console.log("typeof props.url ", typeof props.url );// с хоста приходит стринга, {}-при загрузке файла
+   if ( typeof props.url === "string" )  {
+   setUrl(props.url);
+   }
+   // setUrl(props.url ? props.url : '')
+   }, [props]);
+   // console.log('imageSelected/url', url);//c ноута blob:http://localhost:5173/30004f7d-f03a-4f99-ace2-df82003c7b01 ,
 
-
-  const imageSelected = async(file: File) => {
-    let imageDataUrl = await readFile(file)
-    console.log('imageSelected/file', file);
+  const imageSelected = async (file: File) => {
+    // let imageDataUrl = await readFile(file);
+    // console.log("imageSelected/file", file);
     // try {
     //   !!!!!!  apply rotation if needed  !!!!!!!
     //   const orientation = await getOrientation(file)
@@ -43,37 +44,35 @@ const CroppedImageUploader = ({onChange, ...props}: Props) => {
     // } catch( e ) {
     //   console.warn('failed to detect the orientation')
     // }
-
-    setUrl(imageDataUrl)
-    setFile(file)
-    onChange(file)
+    // console.log("IMAGE UPLOADER ", file);
+    setUrl(URL.createObjectURL(file));
+    setFile(file);
+    onChange(file);
   };
 
   const imageCropped = (blob: Blob) => {
-
-    console.log(blob)
-    // setUrl(URL.createObjectURL(blob))
-    setUrl(blob)
-
-    const fileImg = new File([blob], file.name, {type: file.type});
-    console.log('imageCropped', fileImg);
-    onChange(fileImg);
+    setUrl(URL.createObjectURL(blob));
+    onChange(blob);
   };
   const closeHandlerModal = (value: boolean) => {
-    setCropPicture(value)
-  }
+    setCropPicture(value);
+  };
 
+  return (
+    <>
+      <Uploader.FileUploader fileType={Uploader.FileType.IMAGE} resetOnClick fileSelected={imageSelected}
+        url={props.url} buttonText={props.buttonText} />
 
-  return (<>
-    <Uploader.FileUploader fileType={Uploader.FileType.IMAGE} resetOnClick fileSelected={imageSelected} url={props.url} buttonText={props.buttonText}/>
+      {url && (
+        <div className={s.fileUploaderWrap}>
+          <div className={s.imageContainer}><img src={url} alt="uploudet image" /></div>
+          <Button onClick={() => setCropPicture(!cropPicture)}> Crop picture </Button>
+        </div>
+      )}
 
-    {url && <div className={s.fileUploaderWrap}>
-      <div className={s.imageContainer}><img src={url} alt='uploudet image'/></div>
-      <Button onClick={() => setCropPicture(!cropPicture)}>Crop picture</Button>
-    </div>}
-
-    {cropPicture && <ImageCropperModal image={url} onOk={imageCropped} closeModal={closeHandlerModal}/>}
-  </>);
+      {cropPicture && (<ImageCropperModal image={url} onOk={imageCropped} closeModal={closeHandlerModal}/>)}
+    </>
+  );
 };
 
 export default CroppedImageUploader;

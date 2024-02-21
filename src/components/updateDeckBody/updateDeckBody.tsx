@@ -66,9 +66,11 @@ const UpdateDeckBody = (props: propsType) => {
       setError(err.data.message);
     });
   }
+
   if(isLoading){
     return <ForPageLoader/>
   }
+
   return (<div className={s.updateDeckWrap}>
       <Input placeholder={'name'} label={'Deck name'} value={deckName} onChange={(e: ChangeEvent<HTMLInputElement>) => setNewDeckName(e.currentTarget.value)}/>
       <CroppedImageUploader buttonText={'select picture'} url={imgValue} onChange={onChangeCroppImage}/>
