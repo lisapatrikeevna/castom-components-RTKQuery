@@ -1,0 +1,166 @@
+input,*{
+	color: #10233E;
+}
+.d-flex{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.pull-right{
+	margin-left: auto;
+	width: 50%;
+}
+.calcavtoPic{
+	width: 50%;
+}
+.wr-calculator{
+	background: #FFFFFF;
+	box-shadow: 0px 15px 30px rgba(202, 203, 206, 0.25);
+	border-radius: 10px;
+	padding: 20px;
+	display: flex;
+}
+.calculator{
+	border:2px dashed #18A0FB;
+	display:inline-block;
+	font: normal 16px "Myriad Pro";
+	padding: 10px;
+	background-color:#fff;	
+	border-radius: 0;
+	width: 100%;
+	max-width: 1000px;
+	color: #10233E;
+}
+#calcAvtoTypeE{
+	color: #18A0FB;
+	font-weight: bold;
+font-size: 24px;
+border-color: transparent;
+}
+option{
+	border-color: transparent;
+}
+.calcContent{
+	/*float:left;
+	width:450px;*/
+	width: 100%;
+}
+#mapa {
+	height: 450px;
+	width: 100%;
+	display:block;	
+}
+.calcLeftBlock, .calcRightBlock{
+	display:inline-block;
+	width: 450px;
+	text-align: left;
+	vertical-align:top;
+	overflow:hidden;
+}
+.calcSelBlock{
+	display:inline-block;
+	width: 100%;
+	text-align: left;
+	vertical-align:top;
+	overflow:hidden;
+	margin: 5px 0;
+}
+.calc_input{
+	background: #fff;
+	border: 1px solid #c9c9c9;
+	box-shadow: none;
+	box-sizing: border-box;
+	color: #3f4561;
+	font-size: 14px;
+	line-height: 20px;
+	padding: 5px 7px;
+	width:98%;
+	border-radius:  5px; /*��� ��������������*/
+	-webkit-border-radius: 5px; /*��� Crome*/
+	-moz-border-radius: 5px; /*��� Mozilla*/
+	-o-border-radius: 5px; /*��� Opera*/
+	-ms-border-radius: 5px; /*��� Microsoft*/	
+}
+.calcAddPoint{
+	display:none;
+}
+.showAddPoint{
+	display:inline-block;
+	border-bottom: 1px dashed grey;
+}
+.showAddPoint:hover{
+	cursor:pointer;
+	border-bottom: none;
+	color:blue;
+	border-bottom: 1px dashed grey;
+}
+#calculateBtn{
+	padding: 5px 7px;
+	font: 18px Arial, sans-serif;
+	border: 1px solid rgb(55, 198, 245);
+	color: rgb(55, 198, 245);
+	background-color: rgb(255, 255, 255);
+	-webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	-ms-transition: all 0.3s ease-in;
+	-o-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
+	border-radius:  5px; /*��� ��������������*/
+	-webkit-border-radius: 5px; /*��� Crome*/
+	-moz-border-radius: 5px; /*��� Mozilla*/
+	-o-border-radius: 5px; /*��� Opera*/
+	-ms-border-radius: 5px; /*��� Microsoft*/	
+}
+#calculateBtn:hover{
+	background: rgb(55, 198, 245);
+	color: #fff;
+	cursor: pointer;
+	border-color: rgb(55, 198, 245);
+}
+.calcAutoPic{
+	float:left;
+	width:330px;
+}
+fieldset{
+	border-radius:  10px; /*��� ��������������*/
+	-webkit-border-radius: 10px; /*��� Crome*/
+	-moz-border-radius: 10px; /*��� Mozilla*/
+	-o-border-radius: 10px; /*��� Opera*/
+	-ms-border-radius: 10px; /*��� Microsoft*/	
+}
+.calcTitle{			
+	text-align: center;
+	font: bold 38px Arial;
+	color: #10233E;
+}
+.calcTitle span{
+	border-bottom: 3px solid #18A0FB;
+	width: max-content;
+}
+#calcLoaderSrikeE{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+#calcLoaderSrikeE>span>i.fas{
+	width: 40px;
+	height: 40px;
+	background: #C4C4C4;
+	display: block;
+	content: '';
+	margin: 5px;
+}
+p.desk{
+	color: #9D9D9D;
+}
+.calcAutoRadioLabel:hover{
+	cursor:pointer;
+	color:red;
+}
+.calcAutoDesc .calcAutoPic{
+	display:none;
+}

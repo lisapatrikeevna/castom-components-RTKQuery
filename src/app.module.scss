@@ -1,0 +1,33 @@
+.appWrap{
+height:100vh;
+}
+
+
+//style for header
+.btnMenu>*{
+display:fixed;
+justify-content:center;
+align-items:center;
+}
+.btnMenu{
+padding:0;
+width:30px;
+height:30px;
+border-radius: 40px;
+}
+.authStatusBtn{
+padding:6px 28px;
+border-radius: 4px;
+}
+.userProfile{
+    display: flex;
+    align-items: center;
+}
+.userProfile img{
+// margin-left:10px;
+}
+.avatar{
+width:30px;
+border-radius:30px;
+margin-left:10px;
+}

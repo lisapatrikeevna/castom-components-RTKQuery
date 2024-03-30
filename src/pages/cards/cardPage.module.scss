@@ -1,0 +1,29 @@
+.container {
+  padding: 3% 7%;
+h3,p{
+   color: var(--color-light-100)!important;
+}
+  .headingCart {
+      .deskTitle {
+        color: var(--color-light-100);
+      }
+    }
+    .table{
+    margin-top:20px;
+    }
+  .imgContainer {
+      width: 100px;
+      img {
+        width: 100%;
+      }
+    }
+    .cartInfo{
+    display:flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .tableCeil{
+    display:flex;
+    }
+}

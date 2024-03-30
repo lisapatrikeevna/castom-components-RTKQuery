@@ -1,0 +1,81 @@
+.inNumbers{
+  margin-top: 32px;
+  padding-bottom: 186px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.container {
+  width: 80%;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+.col6{
+  width: 50%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.inNumbers__wrep {
+  border: 1px solid #C0BDBD;
+  box-shadow: 0px 6px 12px rgb(204, 214, 245, 0.38);
+  border-radius: 10px 40px;
+  padding: 15%;
+  min-height: 364px;
+  margin: 15px 0;
+  background: #fff;
+  position: relative;
+}
+.inNumbers__wrep:before {
+  border-radius: 10px 2px;
+  width: 46px;
+  height: 67px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.inNumbers__wrep1:before {
+  background: #77CB9A;
+}
+.inNumbers__wrep2:before {
+  background: #71CBC7;
+}
+.inNumbers__wrep3:before {
+  background: #6BBBD4;
+}
+.inNumbers__wrep4:before {
+  background: #DC84EA;
+}
+.inNumbers__wrep_nomber {
+  font-size: 61px;
+  color: #18A0FB;
+  padding-bottom: 48px;
+  display: block;
+  font-weight: normal;
+  padding-top: 48px;
+  white-space: nowrap;
+}
+.inNumbers__wrep_desk {
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 22px;
+  color: #10233E;
+}
+.inNumbers .row:before {
+  padding: 56px 56px;
+  text-align: center;
+  content: "Компания в цифрах";
+  font-weight: 800;
+  font-size: 38px;
+  background: linear-gradient(180deg, #8037FE 0%, #063FFF 100%);
+  color: #fff;
+  border-radius: 10px 40px;
+  position: absolute;
+  z-index: 9;
+  top: 35%;
+  left: 50%;
+  margin-left: -255px;
+  //font-family: SF UI Display;
+}

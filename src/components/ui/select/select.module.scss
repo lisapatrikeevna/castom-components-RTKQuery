@@ -1,0 +1,86 @@
+.title {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--color-dark-100);
+}
+
+.trigger {
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 6px 12px;
+
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+
+  background: var(--color-dark-900);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+
+  &:focus {
+    border: 1px solid var(--color-info-700);
+    outline: 1px solid var(--color-info-700);
+  }
+
+  &:active,
+  &:hover {
+    border: 1px solid var(--color-dark-100);
+  }
+
+  &:hover {
+    background: var(--color-dark-500);
+  }
+
+  &:disabled {
+    color: var(--color-dark-300);
+    background: var(--color-dark-900);
+    border: 1px solid var(--color-dark-300);
+  }
+}
+
+.selectContent {
+  position: relative;
+  width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
+}
+
+.selectViewport {
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid var(--color-dark-300);
+  border-top: none;
+  border-radius: 2px;
+}
+
+.iconArrow {
+  transition: 0.5s;
+
+  .trigger[data-state='open'] & {
+    transform: rotate(180deg);
+  }
+}
+
+.selectItem {
+  all: inherit;
+
+  padding: 6px 12px;
+
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+
+  background: var(--color-dark-900);
+
+  &:hover,
+  &:focus {
+    color: var(--color-primary-300);
+    background: var(--color-primary-900);
+  }
+}
