@@ -26,7 +26,7 @@ const CardsPage = () => {
 
   const learn = () => {
     const id = data.items[0].id
-    console.log('!!!!id', id);
+    // console.log('!!!!id', id);
     navigate(PATH.learn, {state: {id}})
   }
 
