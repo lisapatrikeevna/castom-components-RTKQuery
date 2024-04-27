@@ -25,6 +25,7 @@ export type TypographyProps<T extends ElementType = 'h3'> = {
   children: ReactNode
   variant?: (typeof TypographyVariant)[number]
 } & ComponentPropsWithoutRef<T>
+
 export const Typography = <T extends ElementType = 'h3'>(
   props: TypographyProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TypographyProps<T>>
 ) => {

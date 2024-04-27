@@ -6,6 +6,17 @@ import { useCreateDeckMutation } from "@/services/decks/decks.servies.ts";
 import CroppedImageUploader from "@/components/ui/imageUplouder/imageUplouder.tsx";
 import { CreateDecksArgs } from "@/pages/flashcards.types.ts";
 
+
+type ServerErrorResponse = {
+  data: {
+    errorMessages: Array<{
+      field: string
+      message: string
+    }>
+  }
+}
+
+
 type imgType=File | Blob | string
 type propsType={
   isOpenHandler:(isOpenValue:boolean)=>void
@@ -17,13 +28,14 @@ const AddNewDeckBody = (props:propsType) => {
   const [addDeck, { error: addDeckError ,data , isLoading, isSuccess}] = useCreateDeckMutation()
 
   const onChangeCroppImage =(file: imgType) => {
+    debugger
      console.log('AddNewDeckBody/CropImage/imgValue', imgValue);
      console.log('AddNewDeckBody/CropImage/file', file);
     setImgValue(file)
   };
 
   const createNewDeck = () => {
-
+debugger
     const formData = new FormData();
     if (imgValue) {
       formData.set('cover', imgValue)
@@ -50,7 +62,7 @@ const AddNewDeckBody = (props:propsType) => {
   return (<div style={{marginTop:7}}>
     <Input placeholder={'name'} label={'Deck name'} value={newDeckName} onChange={(e: ChangeEvent<HTMLInputElement>) => setNewDeckName(e.currentTarget.value)}/>
     <CroppedImageUploader buttonText={'select picture'} url={imgValue}  onChange={onChangeCroppImage}/>
-    <CheckBox label={'Private deck'} checked={privateDeck} onCheckedChange={setPrivate}/>
+    <CheckBox label={'Private deck'} checked={privateDeck} onCheckedChange={()=>setPrivate(!privateDeck)}/>
    <div>
      <Button onClick={createNewDeck} disabled={isLoading}>add deck</Button>
    </div>
@@ -59,14 +71,7 @@ const AddNewDeckBody = (props:propsType) => {
 };
 
 
-type ServerErrorResponse = {
-  data: {
-    errorMessages: Array<{
-      field: string
-      message: string
-    }>
-  }
-}
+
 
 export default AddNewDeckBody;
 

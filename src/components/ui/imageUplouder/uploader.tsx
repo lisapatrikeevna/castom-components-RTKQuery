@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import styles from "@/components/ui/imageUplouder/styles.module.scss";
 import { Button } from "@/components/ui/button";
-import { getRotatedImage, readFile } from "@/helpers.ts";
+// import { getRotatedImage, readFile } from "@/helpers.ts";
 
 export enum FileType {
   IMAGE = "IMAGE",
@@ -29,7 +29,6 @@ type propsType = {
 };
 const FileUploader = (props: propsType) => {
   const [file, setFile] = useState<File | null>(null);
-
   const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
@@ -57,6 +56,7 @@ const FileUploader = (props: propsType) => {
     }
   };
   const click = (e: React.MouseEvent) => {
+    debugger
     if (props.resetOnClick) {
       const target = e.target as HTMLInputElement;
       target.value = "";

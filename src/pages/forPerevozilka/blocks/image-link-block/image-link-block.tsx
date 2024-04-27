@@ -1,4 +1,5 @@
 import './ImageLinkBlock.scss'
+// import serv1 from './assets/serv1.png'
 import serv1 from './assets/servlist1.png'
 import serv2 from './assets/serv2.png'
 import serv3 from './assets/serv3.png'

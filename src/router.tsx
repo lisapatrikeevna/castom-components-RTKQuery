@@ -23,7 +23,7 @@ export const PATH={
   cards:'/cards',
   cardTest:'/cardTest',
   learn:'/cards/learn',
-  perevozilka:'/perevozilka',
+  // perevozilka:'/perevozilka',
 }
 
 const publicRotes: RouteObject[] = [
@@ -37,7 +37,7 @@ const publicRotes: RouteObject[] = [
     // path: '/signUp',
     path: PATH.signUp,
   },
-  {element: <ForPerevozilkaPage/>, path: PATH.perevozilka},
+  // {element: <ForPerevozilkaPage/>, path: PATH.perevozilka},
 ]
 
 const privateRoutes: RouteObject[] = [
@@ -56,7 +56,10 @@ const privateRoutes: RouteObject[] = [
     //   {element: <LearnCards/>, path: PATH.learn}
     // ]
   } ,
-  {element: <LearnCards/>, path: PATH.learn},
+  {
+    element: <LearnCards/>,
+    path: PATH.learn
+  },
 
 
 ]

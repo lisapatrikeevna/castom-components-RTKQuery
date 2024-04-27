@@ -11,22 +11,24 @@
   justify-content: space-around;
   // margin-right: -15px;
   // margin-left: -15px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .col-sm-6 {
   flex: 0 0 auto;
-  width: 50%;
+  width: 49.3%;
   max-width: 50%;
-  padding-right: 15px;
-  padding-left: 15px;
+  //padding-right: 15px;
+  //padding-left: 15px;
 }
 
-.col-md-4 {
+.col-sm-4 {
   flex: 0 0 auto;
-  width: 33.333333%;
+  width: 32.333333%;
   max-width: 33.333333%;
-  padding-right: 15px;
-  padding-left: 15px;
+  //padding-right: 15px;
+  //padding-left: 15px;
 }
 
 
@@ -149,4 +151,17 @@
   // font-weight: 400;
   color: #5A5A5A;
   font-size: 17px;
+}
+
+
+
+
+@media (max-width: 991.98px) {
+  .wrapp-img__link_deck h3{
+    line-height: 21px;
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 768px) {
+
 }

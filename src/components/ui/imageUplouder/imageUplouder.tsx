@@ -3,15 +3,17 @@ import * as Uploader from "./uploader.tsx";
 import ImageCropperModal from "@/components/ui/imageUplouder/ImageCropperModal.tsx";
 import { Button } from "@/components/ui/button";
 import s from "./styles.module.scss";
-import { getRotatedImage, readFile } from "@/helpers.ts";
+// import { getRotatedImage, readFile } from "@/helpers.ts";
 
 interface Props {
   buttonText: string;
   onChange: (blob: Blob) => void;
-  url: string;
+  url: imgType;
+  // url: string;
 }
 
 const CroppedImageUploader = ({ onChange, ...props }: Props) => {
+  debugger
   const [cropPicture, setCropPicture] = useState(false);
   const [url, setUrl] = useState("");
   // const [url, setUrl] = useState(props.url || '')
