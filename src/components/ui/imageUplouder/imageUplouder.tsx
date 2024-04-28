@@ -8,29 +8,26 @@ import s from "./styles.module.scss";
 interface Props {
   buttonText: string;
   onChange: (blob: Blob) => void;
-  url: imgType;
-  // url: string;
+  // url: imgType;
+  url: any;
 }
 
 const CroppedImageUploader = ({ onChange, ...props }: Props) => {
-  debugger
+  console.log("props.url", props.url);
   const [cropPicture, setCropPicture] = useState(false);
   const [url, setUrl] = useState("");
-  // const [url, setUrl] = useState(props.url || '')
   const [file, setFile] = useState({} as File);
 
-  /*  useEffect(() => {
+    useEffect(() => {
     console.log("props.url", props.url);
-    if (
-      props.url &&
-      (typeof props.url === "Blob" || typeof props.url === "string")
-    ) {
-      setUrl(props.url);
+    if (props.url===file ) {
+      let url=URL.createObjectURL(props.url)
+      setUrl(url);
     }
     // setUrl(props.url ? props.url : '')
-  }, [props]);
+  }, [props.url]);
   // console.log('imageSelected/url', url);
- */
+
   const imageSelected = async (file: File) => {
     // let imageDataUrl = await readFile(file);
     // console.log("imageSelected/file", file);
@@ -46,7 +43,7 @@ const CroppedImageUploader = ({ onChange, ...props }: Props) => {
     // } catch( e ) {
     //   console.warn('failed to detect the orientation')
     // }
-    console.log("IMAGE UPLOADER ", file);
+    // console.log("IMAGE UPLOADER ", file);
     setUrl(URL.createObjectURL(file));
     setFile(file);
     onChange(file);

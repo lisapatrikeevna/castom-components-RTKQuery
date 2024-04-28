@@ -56,7 +56,6 @@ const FileUploader = (props: propsType) => {
     }
   };
   const click = (e: React.MouseEvent) => {
-    debugger
     if (props.resetOnClick) {
       const target = e.target as HTMLInputElement;
       target.value = "";
