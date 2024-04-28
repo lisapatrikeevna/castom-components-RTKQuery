@@ -42,10 +42,7 @@ const DesksPage = () => {
   const searchValueHandler = (e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.currentTarget.value)
   const clearInputHandler = () => setSearchValue('')
   const tabSwitcherHandler = (dataBtn: TabSwitcherBtnType) => setTabSwitcherValue(dataBtn.value)
-  const isOpenHandler = (isOpenValue: boolean) => {
-    debugger
-    console.log('isOpenValue', isOpenValue)
-    setIsOpen(isOpenValue)}
+  const isOpenHandler = (isOpenValue: boolean) => setIsOpen(isOpenValue)
   const handlePageChange = (pageNumber: number) => dispatch(deckAC.setCurrentPage(pageNumber))
   const handleSetItemsPerPage = (numPerPage: number) => dispatch(deckAC.setPerPage(numPerPage))
   const openDialog = () => {
