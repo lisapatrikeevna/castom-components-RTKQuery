@@ -11,14 +11,15 @@ export type CustomDropdownMenuProps<T extends ElementType = 'nav'>  ={
 
 const CustomDropdownMenu: React.FC<CustomDropdownMenuProps> = ({ triggerContent, children,className
 }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const handleToggle = () => {
-    setIsOpen(!isOpen)
-  }
+  const [isOpen, setIsOpen] = useState(false);
+  const handleToggle = () => setIsOpen(!isOpen)
+
+
 
   return (
     <div className={s.dropdownMenu}>
-      <div className={s.trigger} onClick={handleToggle}> {triggerContent} </div>
+      <div className={s.trigger} onClick={handleToggle} autoFocus onBlur={handleToggle}> {triggerContent} </div>
+      {/*<div className={s.trigger} onClick={handleToggle}> {triggerContent} </div>*/}
       {isOpen && <div className={s.content}>{children}</div>}
     </div>
   );
