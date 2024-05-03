@@ -18,6 +18,7 @@ export const TypographyVariant = [
   'span',
   'subtitle1',
   'subtitle2',
+  'p'
 ] as const
 
 export type TypographyProps<T extends ElementType = 'h3'> = {
@@ -32,7 +33,8 @@ export const Typography = <T extends ElementType = 'h3'>(
   const { as: Component = 'h3', children, className, variant = 'h3', ...rest } = props
 
   return (
-    <Component className={cx(s[variant], className)} {...rest}>
+    <Component className={`${s[variant]}, ${className}`} {...rest}>
+    {/*<Component className={cx(s[variant], className)} {...rest}>*/}
       {children}
     </Component>
   )

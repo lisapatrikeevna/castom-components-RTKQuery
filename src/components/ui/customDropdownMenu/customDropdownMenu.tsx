@@ -1,5 +1,5 @@
 import { useState, ReactNode, ComponentPropsWithoutRef, ElementType } from "react";
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import s from './customDropdownMenu.module.scss'
 
@@ -33,14 +33,16 @@ interface MenuItemProps {
 }
 
 export const MenuItem: React.FC<MenuItemProps> = ({ children,path, shortcut }) => (
+
   <div className={s.menuItem}>
-    {/*<NavLink to={`path? '{path}': '/'`}>{children}</NavLink>*/}
+    {/*<Link to={`path? '{path}': '/'`}>{children}</Link>*/}
     <div>{children}</div>
     {shortcut && <span className={s.shortcut}>{shortcut}</span>}
   </div>
 )
 
 interface MenuSeparatorProps {
+
 }
 
 export const MenuSeparator: React.FC<MenuSeparatorProps> = () => <div className={s.menuSeparator} />;

@@ -3,17 +3,18 @@ import { Card } from '@/components/ui/card/card'
 import { CheckBox } from '@/components/ui/checkBox'
 import { Input } from '@/components/ui/input'
 import { z } from 'zod'
-import s from './page-login.module.scss'
+import s from './LoginForm.module.scss'
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/services/auth/auth.servies.ts";
 import { PATH } from "@/router.tsx";
+import { ControlledCheckBox } from "@/components/ui/checkBox/contolledCheckBox.tsx";
 
 
 const schema = z.object({
-  password: z.string().nonempty('Enter password'),
+  password: z.string().min(3,'too short password').nonempty('Enter password'),
   email: z.string().email('Invalid email address').nonempty('Enter email'),
   rememberMe: z.boolean().optional(),
 })
@@ -22,23 +23,27 @@ type FormType = z.infer<typeof schema>
 
 
 
-export const PageLogin = () => {
+export const LoginForm = () => {
   const navigate = useNavigate()
-  const {control,register, handleSubmit} = useForm<FormType>(
-    {mode: 'onSubmit', resolver: zodResolver(schema), defaultValues: {email: 'lisa15.08patrikeevna@gmail.com', password: '12345', rememberMe: true,},
+  const [signIn, {isLoading: isSigningIn}] = useLoginMutation()
+  const {control,register, handleSubmit,formState:{errors},} = useForm<FormType>(
+    {
+      mode: 'onSubmit',
+      resolver: zodResolver(schema),
+      defaultValues: {
+        email: 'lisa15.08patrikeevna@gmail.com', password: '12345', rememberMe: true,
+      },
   })
   // const {data, isLoading} = useMeQuery()
-  const [signIn, {isLoading: isSigningIn}] = useLoginMutation()
   // console.log('control', control);
-
   // if( isLoading ) return <div>Loading...</div>
   // if( data ) return <Navigate to="/"/>
+  console.log(errors);
+  const {field:{value,onChange},}=useController({name:'rememberMe', control, defaultValue:false})
 
   const handleSignIn = (data: FormType) => {
     console.log(data);
-    signIn(data)
-    .unwrap()
-    .then(() => {
+    signIn(data).unwrap().then(() => {
       navigate('/')
     })
   }
@@ -53,7 +58,10 @@ export const PageLogin = () => {
         <form onSubmit={handleFormSubmitted}>
           <Input placeholder={'Email'} label={'Email'} name={'email'} {...register( 'email')} />
           <Input label={'Password'} placeholder={'Password'} type={'password'} name={'password'} {...register( 'password')} />
-          <CheckBox label={'Remember me'} {...register('rememberMe')} name={'rememberMe'} position={'left'}/>
+          <ControlledCheckBox label={'Remember me'} name={'rememberMe'} position={'left'}
+                    {...register('rememberMe')}
+                    // checked={value} onCheckedChange={onChange}
+          />
           <Button as={Link} to="/recover-password" className={s.link} rel={'noopener nopener'} variant={'link'}>
             Forgot Password?
           </Button>
@@ -78,7 +86,7 @@ export const PageLogin = () => {
   </>)
 }
 
-export default PageLogin
+export default LoginForm
 
 
 

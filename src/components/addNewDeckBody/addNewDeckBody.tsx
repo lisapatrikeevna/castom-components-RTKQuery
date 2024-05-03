@@ -52,8 +52,7 @@ const AddNewDeckBody = (props: propsType) => {
     addDeck(formData as unknown as CreateDecksArgs).then(() => {
     // addDeck(formData as unknown as CreateDecksArgs).unwrap().then(() => {
       //тк мы не попадаем внутрь из-за .unwrap() делаем без него
-      debugger
-      console.log('addDeck.then isSuccess ', isSuccess);
+      // console.log('addDeck.then isSuccess ', isSuccess);
       dataСleaning()
     }).catch(err => {
       console.log(err);

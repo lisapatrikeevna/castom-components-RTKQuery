@@ -6,13 +6,13 @@ import * as Checkbox from '@radix-ui/react-checkbox'
 import cx from 'clsx'
 
 import s from './checkBox.module.scss'
-type CheckBoxProps = {
+export type CheckboxProps = {
   checked?: boolean
   className?: string
   label?: string
   onCheckedChange?: () => void
 }
-export const CheckBox = forwardRef<ElementRef<typeof Checkbox.Root>, CheckBoxProps>(
+export const CheckBox = forwardRef<ElementRef<typeof Checkbox.Root>, CheckboxProps>(
   ({ checked, className, label, onCheckedChange, ...rest }, ref) => {
     return (
       <div className={s.box}>

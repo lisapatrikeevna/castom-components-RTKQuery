@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import ReactNode from "react";
-
-import { Card } from './'
+import { Card } from "@/components/ui/card/card.tsx";
+// import { Card } from './'
 
 const meta = {
     title: 'Components/Card',

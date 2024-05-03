@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card/card'
+import { Card } from '@/components/ui/card/card.tsx'
 import { Input } from '@/components/ui/input'
 
 import s from './page-auth-forgot-pass.module.scss'

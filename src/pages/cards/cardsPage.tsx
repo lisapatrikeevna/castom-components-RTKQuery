@@ -9,7 +9,6 @@ import { PATH } from "@/router.tsx";
 import { useNavigate } from "react-router-dom";
 
 
-//getCardById
 
 export type CardTypeAuthor = {
   id: string; name: string;
@@ -40,9 +39,10 @@ const empty=()=>{
 }
   return (<div className={s.container}>
     <div className={s.cartInfo}>
-      <Button as={'a'}
-              // onClick={() => navigate(-1)}
-              href={navigate(-1)}>go back</Button>
+      <Button as='a'
+              onClick={() => navigate(-1)}
+              // href={navigate(-1)}
+      >go back</Button>
       <div className={s.headingCart}>
         <Typography as={'h3'} className={s.deskTitle}> {name}</Typography>
         {imgUrl && <div className={s.imgContainer}><img src={imgUrl} alt={name}/></div>}
@@ -65,13 +65,13 @@ const empty=()=>{
           return (<TableRow key={el.id}>
             <TableCell>
               <div className={s.tableCeil}>
-	 {el.questionImg && <div className={s.imgContainer}><img src={el.questionImg}/></div>}
+	 {el.questionImg && <div className={s.imgContainer}><img src={el.questionImg} alt={el.questionImg}/></div>}
 	 {el.question}
               </div>
             </TableCell>
             <TableCell>
               <div className={s.tableCeil}>
-	 {el.answerImg && <div className={s.imgContainer}><img src={el.answerImg}/></div>}
+	 {el.answerImg && <div className={s.imgContainer}><img src={el.answerImg} alt={el.questionImg}/></div>}
 	 {el.answer}
               </div>
             </TableCell>

@@ -18,7 +18,6 @@ type propsType = {
 }
 const Portal = (props: propsType) => {
   const [portalVisible, setPortalVisible] = useState(false);
-  // console.log('portalVisible !!!!', portalVisible);
   useEffect(()=>{
    if( props.isOpen !==undefined){
      setPortalVisible(props.isOpen)
@@ -30,7 +29,9 @@ const Portal = (props: propsType) => {
   return (<div>
     {props.textBtnOpen && <Button onClick={handlePortalVisible}>{props.textBtnOpen}</Button>}
     {props.openBtn && props.openBtn}
-    {portalVisible && createPortal(<PortalComponent onClose={handlePortalVisible} text={props.text} title={props.title} textBtnClose={props.textBtnClose} portalWrapClass={props.portalWrapClass} children={props.children}/>, document.body)}
+    {portalVisible && createPortal(<PortalComponent onClose={handlePortalVisible} text={props.text} title={props.title}
+                                                    textBtnClose={props.textBtnClose} portalWrapClass={props.portalWrapClass}
+                                                    children={props.children}/>, document.body)}
     </div>);
 };
 
@@ -55,7 +56,6 @@ const PortalComponent = (props: PortalComponentProps) => {
         </div>
 
         {props.text && <p>{props.text}</p>}
-
         {props.children}
       </Card>
     </div>);

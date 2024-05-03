@@ -1,4 +1,4 @@
-import {ComponentPropsWithoutRef, ElementType} from 'react'
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 import s from './button.module.scss'
 import { Link } from "react-router-dom";
 
@@ -10,6 +10,7 @@ export type ButtonProps<T extends  ElementType='button'> = {
     fullWidth?: boolean
     className?: string
     iconBtn?:boolean
+    // children: ReactNode
 } & ComponentPropsWithoutRef<T>
 //ComponentPropsWithoutRef -привязываем дефолтные пропы HTML еллемента
 // С помощью Omit мы убираем из пропсов переданного компонента все пропсы, которые уже есть в наших кастомных пропсах, тем самым избегая коллизий.

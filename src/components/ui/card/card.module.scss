@@ -4,8 +4,8 @@
 
 .card {
   position: relative;
-  width: 420px;
-  min-height: 552px;
+  //width: 420px;
+  //min-height: 552px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,10 +30,11 @@
 }
 
 .body {
-  padding: 44px 12px 30px;
+  padding: 0 12px 30px;
+  //padding: 44px 12px 30px;
   width: 100%;
   height: -webkit-fill-available;
-  border: 1px solid #8c61ff;
+  //border: 1px solid #8c61ff;
 }
 
 .width {
