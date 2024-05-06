@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import Header from "@/components/ui/header/header.tsx";
-// import logoImg
+import HeaderIcon from "@/assets/icons/headerIcon";
 
 const meta = {
   tags: ['autodocs'],
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    // logoImg: <logoImg/>,
+    logoImg: <HeaderIcon/>,
     children: 'Primary Button',
   },
 }

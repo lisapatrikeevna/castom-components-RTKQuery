@@ -6,12 +6,14 @@ type initialStateType = {
   decksName: string
   decksImg: string
   user:User
+  isLoggedIn:boolean
 }
 const initialState: initialStateType = {
   decksId: '',
   decksName:'',
   decksImg:'',
   user:{}as User,
+  isLoggedIn:false
 }
 
 const slice = createSlice({
@@ -27,6 +29,7 @@ const slice = createSlice({
     },
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload
+      state.isLoggedIn=true
     },
   }
 })

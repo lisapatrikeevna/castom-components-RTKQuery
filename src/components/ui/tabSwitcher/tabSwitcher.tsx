@@ -18,7 +18,7 @@ export type TabSwitcherProps = {
 } & ComponentPropsWithoutRef<'div'>
 
 export const TabSwitcher = (props: TabSwitcherProps) => {
-  const {onChange,activeBtn,className, buttonsData, variant = 'dark', buttonsVariant = 'primary',title, ...rest} = props
+  const {onChange,activeBtn,className, buttonsData, variant = 'dark', buttonsVariant ,title, ...rest} = props
 
   const btnHandler = ( b:TabSwitcherBtnType) => {
     onChange(b)
@@ -28,7 +28,7 @@ export const TabSwitcher = (props: TabSwitcherProps) => {
   return (<div className={`${s.tabSwitcher} ${variant && s[variant]} ${className}`} {...rest}>
     <h4>{title}</h4>
     {buttonsData.map((b: TabSwitcherBtnType, i: number) => <Button
-      key={i} variant={buttonsVariant && buttonsVariant} className={` ${s.button}  ${activeBtn === b.value && s.btnActive}`} onClick={() => btnHandler( b)}>
+      key={i} variant={buttonsVariant} className={` ${s.button}  ${activeBtn === b.value && s.btnActive}`} onClick={() => btnHandler( b)}>
       {b.name}
     </Button>)}
   </div>)

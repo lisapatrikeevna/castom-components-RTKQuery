@@ -11,6 +11,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/services/auth/auth.servies.ts";
 import { PATH } from "@/router.tsx";
 import { ControlledCheckBox } from "@/components/ui/checkBox/contolledCheckBox.tsx";
+import Portal from "@/components/ui/portal/portal.tsx";
 
 
 const schema = z.object({
@@ -39,7 +40,7 @@ export const LoginForm = () => {
   // if( isLoading ) return <div>Loading...</div>
   // if( data ) return <Navigate to="/"/>
   console.log(errors);
-  const {field:{value,onChange},}=useController({name:'rememberMe', control, defaultValue:false})
+  const {field:{value,onChange},}=useController({defaultValue:false, name:'rememberMe', control})
 
   const handleSignIn = (data: FormType) => {
     console.log(data);
@@ -56,8 +57,8 @@ export const LoginForm = () => {
       <Card className={s.intoAuthCard}>
         <h1 className={s.h1}>Sign In</h1>
         <form onSubmit={handleFormSubmitted}>
-          <Input placeholder={'Email'} label={'Email'} name={'email'} {...register( 'email')} />
-          <Input label={'Password'} placeholder={'Password'} type={'password'} name={'password'} {...register( 'password')} />
+          <Input placeholder={'Email'} label={'Email'} name={'email'} {...register( 'email')} error={errors.email}/>
+          <Input label={'Password'} placeholder={'Password'} type={'password'} name={'password'} {...register( 'password')} error={errors.password} />
           <ControlledCheckBox label={'Remember me'} name={'rememberMe'} position={'left'}
                     {...register('rememberMe')}
                     // checked={value} onCheckedChange={onChange}

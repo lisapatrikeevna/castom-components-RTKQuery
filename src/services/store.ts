@@ -11,7 +11,6 @@ export const store = configureStore({
     // [decksSlice.name]: decksSlice.reducer,
 
     app: appReducer,
-    // auth: authReducer,
     // packs: packsReducer,
     decks: deckReducer,
     // [cardsApi.reducerPath]: cardsApi.reducer
