@@ -18,7 +18,6 @@ export function App() {
 
   return (
     <div className={s.appWrap}>
-
       <Router/>
     </div>
  );

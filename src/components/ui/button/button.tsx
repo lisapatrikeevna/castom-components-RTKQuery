@@ -1,12 +1,11 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 import s from './button.module.scss'
-import { Link } from "react-router-dom";
 
-
+export type buttonsVariantType='primary' | 'secondary' | 'tertiary' | 'link'
 // export type ButtonElementType= 'button'|'a'|Link
 export type ButtonProps<T extends  ElementType='button'> = {
     as?: T
-    variant?: 'primary' | 'secondary' | 'tertiary' | 'link'
+    variant?: buttonsVariantType
     fullWidth?: boolean
     className?: string
     iconBtn?:boolean

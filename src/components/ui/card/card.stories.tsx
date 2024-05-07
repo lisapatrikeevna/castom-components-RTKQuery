@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Card } from "@/components/ui/card/card.tsx";
-// import { Card } from './'
+import EditIcon from "@/assets/icons/editIcon.tsx";
 
 const meta = {
     title: 'Components/Card',
@@ -15,9 +15,6 @@ const meta = {
            text:{
                control:{type:'text'},
            },
-            iconElement:{
-               control:{type:ReactNode}
-            },
         },
         width:{
             control:{type:'text'},
@@ -39,14 +36,18 @@ export const Dark: Story = {
 export const Light: Story = {
     args: {
         variant: 'light',
-        title:{text:'light native title'},
-        children: 'light dody',
+        title:{text:'light native from title'},
+        children: <>'light dody from children' <EditIcon/></>,
+        width: '600px',
     },
 }
 export const White: Story = {
     args: {
         variant: 'white',
+        title:{text:'white native from title' ,iconElement:<EditIcon/>},
+        // title:{text:'white native from title' ,iconElement:<IconEye fill={'#000'} />},
         children: 'Tertiary Button-body',
+        width: '700px',
     },
 }
 

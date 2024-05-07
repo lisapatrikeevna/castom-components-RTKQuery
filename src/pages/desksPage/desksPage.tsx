@@ -70,7 +70,8 @@ const DesksPage = () => {
     <div className={`${s.flexBox} ${s.filterWrap}`}>
 
       <Input placeholder={'Input search'} type={'search'} className={s.search} onChange={searchValueHandler} value={searchValue} clearInput={clearInputHandler}/>
-      <TabSwitcher buttonsData={arrBtnTabSwitcher} title={'Show packs cards'} onChange={tabSwitcherHandler} activeBtn={tabSwitcherValue} className={s.tabSwitcherWrap}/>
+      <TabSwitcher buttonsData={arrBtnTabSwitcher} title={'Show packs cards'} onChange={tabSwitcherHandler} activeBtn={tabSwitcherValue} className={s.tabSwitcherWrap} variant={'average'}/>
+      {/*<TabSwitcher buttonsData={arrBtnTabSwitcher} title={'Show packs cards'} onChange={tabSwitcherHandler} activeBtn={tabSwitcherValue} className={s.tabSwitcherWrap}/>*/}
       <div className={s.wrapSlider}>
         <h4>Number of cards</h4>
         <Slider setSliderValue={setSliderValue} sliderValue={sliderValue}/>
