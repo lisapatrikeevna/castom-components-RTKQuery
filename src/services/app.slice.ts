@@ -35,3 +35,6 @@ const slice = createSlice({
 })
 export const appAC=slice.actions
 export const appReducer=slice.reducer
+
+//выводим тип State
+export type initialStateType= typeof slice.getInitialState

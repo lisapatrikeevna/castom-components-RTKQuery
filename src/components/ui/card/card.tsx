@@ -15,9 +15,7 @@ export type CardProps = {
 
 export const Card = (props: CardProps) => {
     const {className, variant = 'dark', ...rest} = props
-    const sizeCard = {
-        width: props.width
-    }
+    const sizeCard = {width: props.width }
 
     return (
         <div {...rest} className={`${s.card} ${s[variant]} ${className}`} style={sizeCard}>

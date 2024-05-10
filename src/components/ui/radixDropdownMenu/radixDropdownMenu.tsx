@@ -1,90 +1,73 @@
-import { Button } from '@/components/ui/button'
+// import { Button } from '@/components/ui/button'
 import React, { ComponentPropsWithoutRef, ElementType, ReactNode, useState } from 'react'
 import MenuIcon from '@/assets/icons/menuIcon'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import s from './radixDropdownMenu.module.scss'
+import TrashIcon from "@/assets/icons/trashIcon.tsx";
 
+
+type menuItemType=[
+  {shortcut?:string, name:string}
+]
 export type RadixDropdownMenuProps<T extends ElementType = 'nav'> = {
   children?: ReactNode
   triggerContent?: ReactNode
-  className?: string
+  classNameBtn?: string
+  classNameDropdownMenuContent?: string
 } & ComponentPropsWithoutRef<T>
 
-const RadixDropdownMenu: React.FC<RadixDropdownMenuProps> = ({
-  triggerContent,
-  children,
-  className,
-}) => {
+const RadixDropdownMenu: React.FC<RadixDropdownMenuProps> = (props:RadixDropdownMenuProps) => {
+  const {triggerContent, children, classNameBtn, classNameDropdownMenuContent} = props
+  // const {triggerContent, children, classNameBtn, menuItems,classNameDropdownMenuContent} = props
   const [isOpen, setIsOpen] = useState(true)
   const handleToggle = () => {
     setIsOpen(!isOpen)
   }
-  const menuItems = [
-    { shortcut: '⌘ E', name: 'Edit' },
-    { shortcut: '⌘ D', name: 'Duplicate' },
-    { shortcut: '⌘ C', name: 'Contact' },
-  ]
-  const menuItemsSub = [
-    { shortcut: '⌘ P', name: 'Move to project…' },
-    { shortcut: '', name: 'Move to folder…' },
-  ]
+
 
   return (
-    <DropdownMenu.Root>
+    <DropdownMenu.Root className={classNameBtn}>
       {/*<DropdownMenu.Trigger>*/}
       <DropdownMenu.Trigger asChild>
-        <Button aria-label={'Customise options'} className={s.BtnMenu}>
-          <MenuIcon />
-        </Button>
+        {/*<Button aria-label='Customise options' className={s.BtnMenu}>*/}
+        {/*  <MenuIcon />*/}
+        {/*</Button>*/}
+        {triggerContent ? triggerContent : <button className={`${s.BtnMenu} ${classNameBtn}`} aria-label="Customise options">
+          <MenuIcon/>
+        </button>}
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className={s.DropdownMenuContent}>
-          {/*<DropdownMenu.Content className={s.DropdownMenuContent} sideOffset={5}>*/}
-          {menuItems.map(i => (
-            <DropdownMenu.Item shortcut={i.shortcut}>{i.name}</DropdownMenu.Item>
-          ))}
+        <DropdownMenu.Content className={`${s.DropdownMenuContent} classNameDropdownMenuContent && ${ classNameDropdownMenuContent}`} sideOffset={1}>
+
+          {children}
+
 
           <DropdownMenu.Separator className={s.DropdownMenuSeparator} />
 
-          <DropdownMenu.Sub>
-            <DropdownMenu.SubTrigger>More</DropdownMenu.SubTrigger>
-            <DropdownMenu.SubContent className={s.DropdownMenuSubContent}>
-              {menuItemsSub.map(i => (
-                <DropdownMenu.Item> {i.name}</DropdownMenu.Item>
-              ))}
 
-              <DropdownMenu.Separator />
-              <DropdownMenu.Item>Advanced options…</DropdownMenu.Item>
-            </DropdownMenu.SubContent>
-          </DropdownMenu.Sub>
-
-          <DropdownMenu.Separator />
-
-          <DropdownMenu.Item>Share</DropdownMenu.Item>
-          <DropdownMenu.Item className={s.DropdownMenuItem}>Add to favorites</DropdownMenu.Item>
-          <DropdownMenu.Separator />
-
-          <DropdownMenu.Item shortcut="⌘ ⌫" color="red">
-            Delete
-          </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
   )
 }
 
-interface MenuItemProps {
-  children: ReactNode
-  shortcut?: string
-}
 
-export const MenuItem: React.FC<MenuItemProps> = ({ children, shortcut }) => (
-  <div className={s.menuItem}>
-    <span>{children}</span>
-    {shortcut && <span className={s.shortcut}>{shortcut}</span>}
-  </div>
-)
+type MenuItemPropsType={
+  children: ReactNode
+  classNameMenuItem?: string
+  shortcut?:string
+}
+export const MenuItem: React.FC<MenuItemPropsType> = ({ children,classNameMenuItem,shortcut}) => {
+  // <div className={s.menuItem}>
+  //   <span>{children}</span>
+  //   {/*{shortcut && <span className={s.shortcut}>{shortcut}</span>}*/}
+  // </div>
+  return <DropdownMenu.Item shortcut={shortcut} color="#fggjj"  className={`${s.menuItem}  ${classNameMenuItem? classNameMenuItem: ''}`}>
+  {/*return <DropdownMenu.Item shortcut={shortcut &&"⌘ ⌫"} color="red"  className={`${s.shortcut}  ${classNameMenuItem? classNameMenuItem: ''}`}>*/}
+    {children}
+  </DropdownMenu.Item>
+}
 
 interface MenuSeparatorProps {}
 
@@ -105,3 +88,23 @@ export const SubMenu: React.FC<SubMenuProps> = ({ triggerContent, children }) =>
 }
 
 export default RadixDropdownMenu
+
+
+
+
+// export type ToolbarProps = {
+//   /** The preferred content alignment against the trigger. */
+//   align?: 'center' | 'end' | 'start'
+//   /** Use TooltipItem components as children.*/
+//   children: ReactNode
+//   className?: string
+//   style?: CSSProperties
+//   trigger?: ReactNode
+// }
+
+
+
+
+
+
+
